@@ -52,6 +52,14 @@
         }
       }
     }
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "jspm": "^0.17.0-beta.14",
+    "tsd": "^0.6.5"
+  },
+  "scripts": {
+    "restore": "jspm install && tsd reinstall",
+    "start": "http-server . -p 4000 -a localhost -c-1"
   }
 }
-
