@@ -1,0 +1,10 @@
+{
+	"command": "http-server",
+	"isShellCommand": true,
+	"args": [
+		".", 
+		"-p", "4000",
+		"-a", "localhost",
+		"-c-1" /* disable caching */
+	]
+}
