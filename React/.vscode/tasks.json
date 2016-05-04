@@ -1,5 +1,5 @@
 {
     "command": "npm",
     "isShellCommand": true,
-    "args": [ "run",  "start" ]
+    "args": [ "start" ]
 }

@@ -11,6 +11,11 @@
     }
   },
   "devDependencies": {
+    "http-server": "^0.9.0",
     "jspm": "^0.16.14"
+  },
+  "scripts": {
+    "restore": "jspm install && tsd reinstall",
+    "start": "http-server . -p 4000 -a localhost -c-1"
   }
 }
