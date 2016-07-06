@@ -6,7 +6,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+<<<<<<< HEAD
             "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/NetCoreWeb2.dll",
+=======
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/NetCoreConsole.dll",
+>>>>>>> 1a3d8ed6652d7f0aa20911d1549ed04d0e8a4282
             "args": [],
             "cwd": "${workspaceRoot}",
             "externalConsole": false,

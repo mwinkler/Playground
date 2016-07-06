@@ -4,7 +4,13 @@
     "debugType": "portable",
     "emitEntryPoint": true
   },
+<<<<<<< HEAD
   "dependencies": {},
+=======
+  "dependencies": {
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0"
+  },
+>>>>>>> 1a3d8ed6652d7f0aa20911d1549ed04d0e8a4282
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
