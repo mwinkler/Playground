@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  netcoreconsole:
+    image: username/netcoreconsole:Debug
+    environment:
+      - REMOTE_DEBUGGING=${REMOTE_DEBUGGING}
+    volumes:
+      - .:/app

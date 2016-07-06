@@ -17,5 +17,13 @@
       },
       "imports": "dnxcore50"
     }
+  },
+  "publishOptions": {
+    "include": [
+      "docker-compose.yml",
+      "docker-compose.debug.yml",
+      "Dockerfile.debug",
+      "Dockerfile"
+    ]
   }
 }
