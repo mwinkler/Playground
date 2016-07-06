@@ -4,6 +4,6 @@ rmdir dist /s /q
 
 dotnet publish -o dist
 
-docker rmi demowebapp
+docker rmi mwinkler/demowebapp
 
-docker build -t demowebapp ./
+docker build -t mwinkler/demowebapp ./
