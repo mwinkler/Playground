@@ -12,7 +12,7 @@ namespace ConsoleApplication
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseStartup<Startup>()
-                .UseUrls("http://*:5001")
+                .UseUrls("http://0.0.0.0:5001")
                 .Build();
 
             host.Run();
