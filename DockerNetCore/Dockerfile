@@ -2,7 +2,7 @@ FROM microsoft/dotnet:latest
 
 EXPOSE 5001
 
-ADD ./dist /app
+ADD ./bin/Debug/netcoreapp1.0/publish /app
 
 WORKDIR /app
 

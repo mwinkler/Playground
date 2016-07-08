@@ -1,8 +1,8 @@
 @echo off
 
-rmdir dist /s /q
+rmdir bin\Debug\netcoreapp1.0\publish /s /q
 
-dotnet publish -o dist
+dotnet publish
 
 docker rmi mwinkler/demowebapp
 

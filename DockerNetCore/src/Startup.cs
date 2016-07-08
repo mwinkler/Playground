@@ -1,14 +1,24 @@
-
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace ConsoleApplication
+namespace DockerNetCore
 {
     public class Startup
     {
-        public void Configure(IApplicationBuilder app)
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.Run(ctx => ctx.Response.WriteAsync("Hello world!"));
+            services.AddMvc();
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (true || env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseMvc();
         }
     }
 }
