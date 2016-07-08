@@ -6,11 +6,6 @@ namespace DockerNetCore.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
-        // public HomeController(IHostingEnvironment env)
-        // {
-
-        // }
-
         public IActionResult Index()
         {
             return View();

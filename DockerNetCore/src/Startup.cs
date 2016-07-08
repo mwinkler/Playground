@@ -13,10 +13,10 @@ namespace DockerNetCore
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (true || env.IsDevelopment())
-            {
+            // if (env.IsDevelopment())
+            // {
                 app.UseDeveloperExceptionPage();
-            }
+            // }
 
             app.UseMvc();
         }

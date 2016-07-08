@@ -1,5 +1,17 @@
+@using System.Reflection
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+
 <html>
-    <body>
-        Hello
-    </body>
+<body>
+  <h3>Running in Docker!</h3>
+  <table>
+      @foreach(var field in env.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+      {
+        <tr>
+            <td>@field.Name</td>
+            <td>@field.GetValue(env)</td>
+        </tr>
+      }
+  </table>
+</body>
 </html>
