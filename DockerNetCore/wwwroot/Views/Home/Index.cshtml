@@ -1,4 +1,5 @@
 @using System.Reflection
+@using System.Runtime.InteropServices
 @inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
 
 <html>
@@ -8,8 +9,16 @@
       @foreach(var field in env.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
       {
         <tr>
-            <td>@field.Name</td>
+            <td>IHostingEnvironment.@field.Name</td>
             <td>@field.GetValue(env)</td>
+        </tr>
+      }
+
+      @foreach(var field in typeof(RuntimeInformation).GetProperties(BindingFlags.Public | BindingFlags.Static))
+      {
+        <tr>
+            <td>RuntimeInformation.@field.Name</td>
+            <td>@field.GetValue(null)</td>
         </tr>
       }
   </table>
