@@ -40,5 +40,9 @@
         }
       }
     }
+  },
+  "scripts": {
+    "bundle": "jspm bundle app dist/app.js --minify --inject"
   }
-}
+}
+

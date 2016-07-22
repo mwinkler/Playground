@@ -5,15 +5,7 @@ SystemJS.config({
     "app/": "src/"
   },
   browserConfig: {
-    "baseURL": "/",
-    "bundles": {
-      "dist/app.js": [
-        "app/app.ts",
-        "npm:jquery@3.1.0/dist/jquery.js",
-        "npm:jquery@3.1.0.json",
-        "github:frankwallis/plugin-typescript@5.0.8.json"
-      ]
-    }
+    "baseURL": "/"
   },
   devConfig: {
     "map": {
