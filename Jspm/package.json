@@ -42,7 +42,13 @@
     }
   },
   "scripts": {
+    "install": "jspm install && typings install",
+    "build": "ntsc --outFile dist/app.js",
     "bundle": "jspm bundle app dist/app.js --minify --inject"
+  },
+  "devDependencies": {
+    "jspm": "^0.17.0-beta.22",
+    "ntypescript": "^1.201607250008.1",
+    "typings": "^1.3.2"
   }
 }
-
