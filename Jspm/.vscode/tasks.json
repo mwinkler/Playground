@@ -1,10 +1,10 @@
 {
-    "command": "http-server",
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "tsc",
     "isShellCommand": true,
-    "args": [
-        ".", 
-        "-p", "4000",
-        "-a", "localhost",
-        "-c-1" /* disable caching */
-    ]
+    "args": ["-p", "."],
+    "showOutput": "silent",
+    "problemMatcher": "$tsc"
 }
