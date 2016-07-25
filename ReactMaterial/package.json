@@ -1,13 +1,12 @@
 {
   "jspm": {
     "name": "app",
-    "main": "app.js",
+    "main": "app",
     "directories": {
       "lib": "src"
     },
     "dependencies": {
-      "material-ui": "npm:material-ui@^0.14.4",
-      "react-dom": "npm:react-dom@^0.14.0"
+      "material-ui": "npm:material-ui@^0.14.4"
     },
     "devDependencies": {
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.6"
@@ -15,7 +14,10 @@
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
+      "constants": "github:jspm/nodelibs-constants@^0.2.0-alpha",
       "core-js": "npm:core-js@^1.2.0",
+      "crypto": "github:jspm/nodelibs-crypto@^0.2.0-alpha",
       "domain": "github:jspm/nodelibs-domain@^0.2.0-alpha",
       "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
       "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
@@ -24,7 +26,8 @@
       "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "react": "npm:react@^15.0.1",
+      "react": "npm:react@^0.14.8",
+      "react-dom": "npm:react-dom@^0.14.0",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.2.0",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
@@ -34,13 +37,6 @@
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
     },
     "overrides": {
-      "npm:babel-runtime@5.8.38": {
-        "main": false,
-        "dependencies": {},
-        "optionalDependencies": {
-          "core-js": "^1.2.0"
-        }
-      },
       "npm:browserify-zlib@0.1.4": {
         "dependencies": {
           "readable-stream": "^2.0.2",
@@ -50,27 +46,36 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
-      "npm:esprima@2.7.2": {
-        "jspmNodeConversion": false
+      "npm:fbjs@0.6.1": {
+        "dependencies": {}
       },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
       },
-      "npm:readable-stream@1.0.34": {
-        "map": {
-          "stream": "stream-browserify/index"
-        },
-        "systemjs": {
-          "main": "readable.js"
-        },
+      "npm:react@0.14.8": {
         "dependencies": {
-          "core-util-is": "~1.0.0",
-          "isarray": "0.0.1",
-          "string_decoder": "~0.10.0",
-          "inherits": "~2.0.1",
-          "stream-browserify": "~1.0.0"
+          "fbjs": "^0.6.1"
+        },
+        "format": "cjs",
+        "meta": {
+          "*": {
+            "globals": {
+              "process": "process"
+            }
+          }
+        },
+        "map": {
+          "fbjs/lib/ExecutionEnvironment.js": {
+            "production": "@empty"
+          },
+          "./lib/ReactDefaultPerf.js": {
+            "production": "@empty"
+          },
+          "./lib/ReactTestUtils.js": {
+            "production": "@empty"
+          }
         }
       },
       "npm:typescript@1.8.10": {
@@ -95,5 +100,4 @@
     "restore": "jspm install && tsd reinstall",
     "start": "http-server . -p 4000 -a localhost -c-1"
   }
-}
-
+}

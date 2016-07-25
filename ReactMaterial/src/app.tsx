@@ -1,9 +1,10 @@
-import * as React from 'react'
-import * as ReactDom from 'react-dom'
+import React from 'react'
+import ReactDom from 'react-dom'
 //import * as MaterialUi from 'material-ui'
 
 import RaisedButton from 'material-ui/lib/raised-button'
 import AppBar from 'material-ui/lib/app-bar'
+//import test from 'material-ui/'
 
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 // injectTapEventPlugin();
