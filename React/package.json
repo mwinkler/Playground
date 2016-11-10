@@ -2,15 +2,15 @@
   "jspm": {
     "dependencies": {
       "core-decorators": "npm:core-decorators@^0.11.0",
-      "react": "npm:react@^0.14.7",
       "react-dom": "npm:react-dom@^0.14.7"
     },
     "devDependencies": {
-      "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
       "plugin-typescript": "github:frankwallis/plugin-typescript@^4.0.6"
     },
     "peerDependencies": {
-      "process": "github:jspm/nodelibs-process@^0.2.0-alpha"
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "react": "npm:react@^0.14.7"
     },
     "overrides": {
       "npm:fbjs@0.6.1": {
