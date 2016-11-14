@@ -1,25 +1,8 @@
-// 'use strict';
-
-// const webpack = require("webpack");
-
-// module.exports = {
-//   context: __dirname + "/src",
-//   entry: {
-//     app: "./app.js",
-//   },
-//   output: {
-//     path: __dirname + "/dist",
-//     filename: "[name].bundle.js",
-//   },
-// };
-
-
-
 
 const webpack = require('webpack');
 const path = require('path');
-
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: {
@@ -35,8 +18,9 @@ const config = {
   },
   module: {
     rules: [
+      { test: /\.ts$/, /*exclude: /node_modules/,*/ loader: 'awesome-typescript' },
+      //{ test: /\.html$/, loader: 'file' },
       //{ enforce: 'pre', test: /\.ts$/, exclude: /node_modules/, loader: 'tslint' },
-      { test: /\.ts$/, exclude: /node_modules/, loader: 'ts-loader' },
       // { test: /\.json$/, loader: 'json' },
       // { test: /\.html/, loader: 'html?minimize=false' },
       // { test: /\.styl$/, loader: 'css!stylus' },
@@ -45,30 +29,11 @@ const config = {
       // { test: /\.woff2?$/, loader: 'url?name=dist/fonts/[name].[ext]&limit=10000&mimetype=application/font-woff' },
       // { test: /\.(ttf|eot|svg)$/, loader: 'file?name=dist/fonts/[name].[ext]' }
     ]
-  }
+  }, 
+  plugins: [
+      new cleanWebpackPlugin(['dist']),
+      new copyWebpackPlugin([{ from: './src/index.html' }])
+  ]
 };
-
-// if (!(process.env.WEBPACK_ENV === 'production')) {
-//   config.devtool = 'source-map';
-//   config.plugins = [
-//     new webpack.DefinePlugin({
-//       'WEBPACK_ENV': '"dev"'
-//     })
-//   ]
-// } else {
-//   config.plugins = [
-//     new webpack.optimize.UglifyJsPlugin({
-//       compress: {
-//         screw_ie8: true,
-//         warnings: false
-//       },
-//       comments: false
-//     }),
-//     new webpack.DefinePlugin({
-//       'WEBPACK_ENV': '"production"'
-//     }),
-//     new CopyWebpackPlugin([{ from: './src/index.html' }], {})
-//   ];
-// }
 
 module.exports = config;
