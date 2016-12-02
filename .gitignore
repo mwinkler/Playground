@@ -238,3 +238,4 @@ _Pvt_Extensions
 # other
 jspm_packages/
 */typings/
+/NetCore11/src/WebMvc/wwwroot/lib
