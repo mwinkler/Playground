@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Swisscom SDX CSS -->
+    <link rel="stylesheet" href="node_modules/sdx/dist/css/sdx.min.css">
+</head>
+
+<body>
+    <h1>Hello, world!</h1>
+
+    <div class="progress-full" init="auto" tabindex="0">
+        <div class="progress-full__bar"></div>
+        <div class="progress-full__sections">
+            <span>Introduction</span>
+            <span>Settings</span>
+            <span>Customization</span>
+            <span class="section--active">Connection</span>
+            <span>Security</span>
+            <span>Payment</span>
+            <span>Confirmation</span>
+        </div>
+    </div>
+
+    <button class="button button--primary modal-trigger" href="myModalDialog">Open notification modal</button>
+
+    <div id="myModalDialog" class="modal modal--notification" role="dialog" tabindex="-1">
+        <div class="modal__content">
+            <button class="modal__close modal-cancel" aria-label="Close">
+                <i class="icon icon-022-close" aria-hidden="true"></i>
+            </button>
+            <div class="modal__body">
+                <div class="notification-message">
+                    <i class="icon icon-051-message" aria-hidden="true"></i> You have 4 new messages
+                </div>
+                <button class="button button--responsive button--thin">Go to inbox</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swisscom SDX JS Library -->
+    <script src="node_modules/sdx/dist/js/sdx.min.js"></script>
+</body>
+
+</html>
