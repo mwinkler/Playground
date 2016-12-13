@@ -12,24 +12,9 @@
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
-
-    <div class="progress-full" init="auto" tabindex="0">
-        <div class="progress-full__bar"></div>
-        <div class="progress-full__sections">
-            <span>Introduction</span>
-            <span>Settings</span>
-            <span>Customization</span>
-            <span class="section--active">Connection</span>
-            <span>Security</span>
-            <span>Payment</span>
-            <span>Confirmation</span>
-        </div>
-    </div>
-
     <button class="button button--primary modal-trigger" href="myModalDialog">Open notification modal</button>
 
-    <div id="myModalDialog" class="modal modal--notification" role="dialog" tabindex="-1">
+    <div id="myModalDialog" class="modal modal--notification" role="dialog" tabindex="-1" init="auto">
         <div class="modal__content">
             <button class="modal__close modal-cancel" aria-label="Close">
                 <i class="icon icon-022-close" aria-hidden="true"></i>
