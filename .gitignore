@@ -236,6 +236,5 @@ _Pvt_Extensions
 .fake/
 
 # other
-jspm_packages/
-*/typings/
-/NetCore11/src/WebMvc/wwwroot/lib
+
+
