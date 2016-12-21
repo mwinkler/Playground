@@ -4,14 +4,14 @@
   "description": "",
   "main": "src/main.js",
   "dependencies": {
-    "electron": "^1.4.13"
   },
   "devDependencies": {
+    "electron": "^1.4.13",
     "electron-packager": "^8.4.0"
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --out dist"
+    "build": "electron-packager . --out=dist --overwrite --asar=true"
   },
   "author": "",
   "license": "MIT"
