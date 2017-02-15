@@ -1,0 +1,21 @@
+{
+  "name": "webpack2test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^2.0.40",
+    "css-loader": "^0.26.1",
+    "ts-loader": "^2.0.0",
+    "typescript": "^2.1.6",
+    "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC"
+}
