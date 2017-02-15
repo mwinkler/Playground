@@ -4,3 +4,4 @@ import './components/demo-1'
 //new demo1;
 
 //$(document.body).append(new demo1);
+console.info('ok');

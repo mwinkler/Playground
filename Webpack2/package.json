@@ -9,12 +9,15 @@
   "devDependencies": {
     "@types/jquery": "^2.0.40",
     "css-loader": "^0.26.1",
+    "style-loader": "^0.13.1",
     "ts-loader": "^2.0.0",
     "typescript": "^2.1.6",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC"
