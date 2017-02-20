@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const Clean = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
+const Html = require('html-webpack-plugin');
 
 module.exports = function(env) {
 
@@ -10,7 +11,7 @@ module.exports = function(env) {
     const isProd = env === 'production';
 
     const plugins = [
-        new Copy([{ from: 'src/index.html' }])
+        new Html({ template: 'src/index.html' })
     ];
 
     if (isProd) {
