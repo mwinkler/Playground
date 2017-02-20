@@ -1,10 +1,14 @@
-var path = require('path');
+const path = require('path');
+const Clean = require('clean-webpack-plugin');
+const Copy = require('copy-webpack-plugin');
+
+const dist = path.resolve(__dirname, 'dist');
 
 module.exports = {
     entry: './src/index.ts',
     output: {
-        filename: '/bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'bundle.js',
+        path: dist
     },
     module: {
         rules: [
@@ -22,6 +26,10 @@ module.exports = {
     resolve: {
         extensions: [".tsx", ".ts", ".js"]
     },
+    plugins: [
+        new Clean(['dist']),
+        new Copy([{ from: 'src/index.html' }])
+    ],
     devServer: {
     }
 };
