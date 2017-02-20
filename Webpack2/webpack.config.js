@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const Clean = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
+const ExtractText = require('extract-text-webpack-plugin');
 
 module.exports = function(env) {
 
@@ -13,10 +14,11 @@ module.exports = function(env) {
     ];
 
     if (isProd) {
+        plugins.push(new Clean(['dist']));
+        plugins.push(new ExtractText('styles.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             comments: false
         }));
-        plugins.push(new Clean(['dist']));
     }
 
     return {
@@ -34,7 +36,9 @@ module.exports = function(env) {
                 },
                 {
                     test: /\.css$/,
-                    use: [ 'style-loader', 'css-loader' ]
+                    use: isProd
+                        ? ExtractText.extract({ use: 'css-loader' })
+                        : [ 'style-loader', 'css-loader' ]
                 }
             ],
         },
