@@ -40,14 +40,21 @@ module.exports = function(env) {
                     use: isProd
                         ? ExtractText.extract({ use: 'css-loader' })
                         : [ 'style-loader', 'css-loader' ]
+                },
+                {
+                    test: /\.(png|jpg)$/,
+                    use: [{
+                        loader: 'url-loader',
+                        options: { limit: 10000 } // Convert images < 10k to base64 strings
+                    }]
                 }
             ],
         },
         resolve: {
-            extensions: [".tsx", ".ts", ".js"]
+            extensions: ['.tsx', '.ts', '.js']
         },
         plugins: plugins,
         devServer: {
         }
     }
-};
+}

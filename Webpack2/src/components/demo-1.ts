@@ -1,3 +1,6 @@
-import './demo-1.css';
+import './demo-1.css'
+import img from './demo.png'
 
-export var demo1 = document.registerElement('demo-1');
+//document.registerElement('demo-1');
+
+console.log('demo-1 registered ' + img);

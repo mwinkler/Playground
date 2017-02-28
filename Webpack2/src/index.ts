@@ -1,8 +1,7 @@
-import './components/demo-1';
-import * as $ from 'jquery';
+import './components/demo-1'
+//import * as $ from 'jquery'
 
-//new demo1;
+//$(document.body).append('<demo-1>My Tag</demo-1>');
+document.body.innerHTML = `<demo-1>My Tag</demo-1>`;
 
-$(document.body).append('<demo-1>My Tag</demo-1>');
-console.info('ok');
-
+console.log('ready');
