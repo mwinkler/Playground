@@ -16,16 +16,18 @@ module.exports = function(env) {
 
     if (isProd) {
         plugins.push(new Clean(['dist']));
-        plugins.push(new ExtractText('styles.css'));
+        plugins.push(new ExtractText('[name].bundle.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             comments: false
         }));
     }
 
     return {
-        entry: './src/index.ts',
+        entry: {
+            demo: './src/index.ts'
+        },
         output: {
-            filename: 'bundle.js',
+            filename: '[name].bundle.js',
             path: dist
         },
         module: {
