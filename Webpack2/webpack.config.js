@@ -5,7 +5,7 @@ const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
 const Html = require('html-webpack-plugin');
 
-module.exports = function(env) {
+module.exports = env => {
 
     const dist = path.resolve(__dirname, 'dist');
     const isProd = env === 'production';
@@ -40,7 +40,12 @@ module.exports = function(env) {
                 {
                     test: /\.s?css$/,
                     use: isProd
-                        ? ExtractText.extract({ use: ['css-loader', 'sass-loader'] })
+                        ? ExtractText.extract({ 
+                            use: [
+                                { loader: 'css-loader', options: { minimize: true } }, 
+                                'sass-loader'
+                            ] 
+                        })
                         : [ 'style-loader', 'css-loader', 'sass-loader' ]
                 },
                 {
