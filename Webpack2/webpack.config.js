@@ -49,13 +49,17 @@ module.exports = function(env) {
                         loader: 'url-loader',
                         options: { limit: 1 } // Convert images < limit (byte) to base64 strings
                     }]
+                },
+                {
+                    test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                    loader: 'file-loader'
                 }
             ],
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js']
         },
-        devtool: isProd ? undefined : 'inline-source-map',
+        devtool: isProd ? false : 'inline-source-map',
         plugins: plugins,
         devServer: {
         }
