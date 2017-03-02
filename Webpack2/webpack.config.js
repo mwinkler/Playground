@@ -40,14 +40,14 @@ module.exports = function(env) {
                 {
                     test: /\.s?css$/,
                     use: isProd
-                        ? ExtractText.extract({ use: 'css-loader' })
+                        ? ExtractText.extract({ use: ['css-loader', 'sass-loader'] })
                         : [ 'style-loader', 'css-loader', 'sass-loader' ]
                 },
                 {
-                    test: /\.(png|jpg)$/,
+                    test: /\.(png|jpg|gif)$/,
                     use: [{
                         loader: 'url-loader',
-                        options: { limit: 10000 } // Convert images < 10k to base64 strings
+                        options: { limit: 1 } // Convert images < limit (byte) to base64 strings
                     }]
                 }
             ],
