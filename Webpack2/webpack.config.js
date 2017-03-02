@@ -41,10 +41,7 @@ module.exports = env => {
                     test: /\.s?css$/,
                     use: isProd
                         ? ExtractText.extract({ 
-                            use: [
-                                { loader: 'css-loader', options: { minimize: true } }, 
-                                'sass-loader'
-                            ] 
+                            use: [ 'css-loader?minimize', 'sass-loader' ] 
                         })
                         : [ 'style-loader', 'css-loader', 'sass-loader' ]
                 },
