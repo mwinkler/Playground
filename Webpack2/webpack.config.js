@@ -50,14 +50,17 @@ module.exports = env => {
                 },
                 {
                     test: /\.(png|jpg|gif)$/,
-                    use: [{
-                        loader: 'url-loader',
-                        options: { limit: 1 } // Convert images < limit (byte) to base64 strings
-                    }]
+                    loader: 'url-loader',
+                    options: { limit: 1 } // Convert images < limit (byte) to base64 strings
                 },
                 {
                     test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                     loader: 'file-loader'
+                },
+                {
+                    test: /\.html$/,
+                    loader: 'html-loader',
+                    options: { exportAsEs6Default: true }
                 }
             ],
         },
