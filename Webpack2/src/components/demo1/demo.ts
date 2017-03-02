@@ -1,4 +1,4 @@
-import './demo-1.css'
+import './demo.scss'
 import img from './demo.png'
 
 //document.registerElement('demo-1');

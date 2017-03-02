@@ -38,10 +38,10 @@ module.exports = function(env) {
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.css$/,
+                    test: /\.s?css$/,
                     use: isProd
                         ? ExtractText.extract({ use: 'css-loader' })
-                        : [ 'style-loader', 'css-loader' ]
+                        : [ 'style-loader', 'css-loader', 'sass-loader' ]
                 },
                 {
                     test: /\.(png|jpg)$/,
@@ -55,6 +55,7 @@ module.exports = function(env) {
         resolve: {
             extensions: ['.tsx', '.ts', '.js']
         },
+        devtool: isProd ? undefined : 'inline-source-map',
         plugins: plugins,
         devServer: {
         }

@@ -1,4 +1,4 @@
-import './components/demo-1'
+import './components/demo1/demo'
 //import * as $ from 'jquery'
 
 //$(document.body).append('<demo-1>My Tag</demo-1>');
