@@ -7,7 +7,6 @@ const Html = require('html-webpack-plugin');
 
 module.exports = env => {
 
-    const dist = path.resolve(__dirname, 'dist');
     const isProd = env === 'production';
 
     const plugins = [
@@ -28,7 +27,7 @@ module.exports = env => {
         },
         output: {
             filename: '[name].bundle.js',
-            path: dist
+            path: path.resolve(__dirname, 'dist')
         },
         module: {
             rules: [
