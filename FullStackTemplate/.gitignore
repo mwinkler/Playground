@@ -1,0 +1,12 @@
+
+# Node / NPM
+npm-debug.log
+node_modules/
+
+# Build output
+build/
+bin/
+obj/
+
+# .NET, Visual Studio
+project.lock.json
