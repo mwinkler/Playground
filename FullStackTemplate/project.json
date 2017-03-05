@@ -7,8 +7,8 @@
   "dependencies": {
     "Microsoft.AspNetCore.Mvc": "1.1.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
-    "Microsoft.AspNetCore.Diagnostics": "1.1.0"
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0"
+    //"Microsoft.AspNetCore.Diagnostics": "1.1.0"
   },
   "frameworks": {
     "netcoreapp1.1": {

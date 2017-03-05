@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build-client": "webpack --env=prod",
-    "build-server": "dotnet publish --output build/sever",
+    "build-server": "dotnet publish --output build/server -c release",
     "start": "webpack-dev-server"
   }
 }

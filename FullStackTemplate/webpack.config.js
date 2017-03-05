@@ -10,7 +10,7 @@ module.exports = env => {
     const isProd = env === 'prod';
 
     const plugins = [
-        new Html({ template: 'client/index.html' })
+        new Html({ template: 'src/client/index.html' })
     ];
 
     // production build plugins
@@ -35,7 +35,7 @@ module.exports = env => {
 
     return {
         entry: {
-            demo: './client/index.ts'
+            demo: './src/client/index.ts'
         },
         output: {
             filename: '[name].bundle.js',
