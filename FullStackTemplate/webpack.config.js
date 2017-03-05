@@ -7,17 +7,29 @@ const Html = require('html-webpack-plugin');
 
 module.exports = env => {
 
-    const isProd = env === 'production';
+    const isProd = env === 'prod';
 
     const plugins = [
         new Html({ template: 'client/index.html' })
     ];
 
+    // production build plugins
     if (isProd) {
         plugins.push(new Clean(['build']));
         plugins.push(new ExtractText('[name].bundle.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
+            mangle: {
+                screw_ie8: true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true
+            },
             comments: false
+        }));
+        plugins.push(new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
         }));
     }
 
@@ -40,9 +52,9 @@ module.exports = env => {
                     test: /\.s?css$/,
                     use: isProd
                         ? ExtractText.extract({ 
-                            use: [ 'css-loader?minimize', 'sass-loader' ] 
+                            use: ['css-loader?minimize', 'sass-loader'] 
                         })
-                        : [ 'style-loader', 'css-loader', 'sass-loader' ]
+                        : ['style-loader', 'css-loader', 'sass-loader']
                 },
                 {
                     test: /\.(png|jpg|gif)$/,

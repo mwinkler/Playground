@@ -26,7 +26,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
-    "build": "webpack --env=production",
+    "build": "webpack --env=prod",
     "start": "webpack-dev-server"
   }
 }
