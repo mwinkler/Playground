@@ -1,4 +1,3 @@
-
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +31,7 @@ namespace Server
                 //.AddAuthorization()
                 //.AddViews()
                 //.AddRazorViewEngine()
-                //.AddJsonFormatters()
+                .AddJsonFormatters()
                 ;
         }
 
@@ -51,18 +50,18 @@ namespace Server
             // https://docs.asp.net/en/latest/mvc/index.html
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{*url}", new { controller = "Home", action = "Index" });
+                //routes.MapRoute("default", "{*url}", new { controller = "Home", action = "Index" });
             });
         }
 
         public static void Main()
         {
-            var cwd = Directory.GetCurrentDirectory();
-            var web = Path.GetFileName(cwd) == "server" ? "../public" : "public";
+            // var cwd = Directory.GetCurrentDirectory();
+            // var web = Path.GetFileName(cwd) == "server" ? "../public" : "public";
 
             var host = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseWebRoot(web)
+                .UseWebRoot("build")
                 .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();
