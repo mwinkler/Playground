@@ -15,7 +15,7 @@ module.exports = env => {
 
     // production build plugins
     if (isProd) {
-        plugins.push(new Clean(['build']));
+        plugins.push(new Clean(['build/client']));
         plugins.push(new ExtractText('[name].bundle.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             mangle: {
@@ -39,7 +39,7 @@ module.exports = env => {
         },
         output: {
             filename: '[name].bundle.js',
-            path: path.resolve(__dirname, 'build')
+            path: path.resolve(__dirname, 'build', 'client')
         },
         module: {
             rules: [

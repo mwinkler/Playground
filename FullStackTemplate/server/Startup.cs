@@ -61,7 +61,7 @@ namespace Server
 
             var host = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseWebRoot("build")
+                .UseWebRoot("build/client")
                 .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();

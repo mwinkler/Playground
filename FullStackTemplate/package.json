@@ -26,7 +26,8 @@
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
-    "build": "webpack --env=prod",
+    "build-client": "webpack --env=prod",
+    "build-server": "dotnet publish --output build/sever",
     "start": "webpack-dev-server"
   }
 }
