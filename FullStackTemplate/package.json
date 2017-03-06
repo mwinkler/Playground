@@ -6,7 +6,8 @@
   "scripts": {
     "build-client": "npm run clean-client && webpack --env=prod",
     "build-server": "npm run clean-server && dotnet publish src/server -o build/server -c release -b src",
-    "start": "webpack-dev-server",
+    "start": "dotnet build/server/server.dll",
+    "start-client": "webpack-dev-server",
     "clean-server": "rimraf build/server",
     "clean-client": "rimraf build/client"
   },
