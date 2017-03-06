@@ -1,8 +1,13 @@
 {
-  "name": "webpack2test",
+  "name": "full-stack-template",
   "version": "1.0.0",
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "build-client": "webpack --env=prod",
+    "build-server": "dotnet publish src/server -o build/server -c release -b src",
+    "start": "webpack-dev-server"
+  },
   "dependencies": {
     "jquery": "^3.1.1",
     "font-awesome": "^4.7.0"
@@ -24,10 +29,5 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
-  },
-  "scripts": {
-    "build-client": "webpack --env=prod",
-    "build-server": "dotnet publish src/server -o build/server -c release -b src",
-    "start": "webpack-dev-server"
   }
 }
