@@ -16,18 +16,9 @@ module.exports = env => {
     if (isProd) {
         plugins.push(new ExtractText('[name].bundle.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: true
-            },
-            compress: {
-                screw_ie8: true
-            },
+            mangle: { screw_ie8: true },
+            compress: { screw_ie8: true },
             comments: false
-        }));
-        plugins.push(new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
         }));
     }
 
@@ -49,9 +40,7 @@ module.exports = env => {
                 {
                     test: /\.s?css$/,
                     use: isProd
-                        ? ExtractText.extract({ 
-                            use: ['css-loader?minimize', 'sass-loader'] 
-                        })
+                        ? ExtractText.extract(['css-loader?minimize', 'sass-loader'])
                         : ['style-loader', 'css-loader', 'sass-loader']
                 },
                 {
