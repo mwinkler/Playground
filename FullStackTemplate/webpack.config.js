@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const Clean = require('clean-webpack-plugin');
 const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
 const Html = require('html-webpack-plugin');
@@ -15,7 +14,6 @@ module.exports = env => {
 
     // production build plugins
     if (isProd) {
-        plugins.push(new Clean(['build/client']));
         plugins.push(new ExtractText('[name].bundle.css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             mangle: {
