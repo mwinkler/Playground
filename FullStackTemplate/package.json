@@ -9,7 +9,10 @@
     "start": "dotnet build/server/server.dll",
     "start-client": "webpack-dev-server",
     "clean-server": "rimraf build/server",
-    "clean-client": "rimraf build/client"
+    "clean-client": "rimraf build/client",
+    "docker-build": "docker build -t mwinkler/fullstackdemo ./",
+    "docker-run" : "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
+    "docker-stop": "docker stop fullstackdemo && docker rm fullstackdemo"
   },
   "dependencies": {
     "jquery": "^3.1.1",
