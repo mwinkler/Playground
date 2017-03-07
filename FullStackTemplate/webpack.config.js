@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const Copy = require('copy-webpack-plugin');
+//const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
 const Html = require('html-webpack-plugin');
 
@@ -46,11 +46,12 @@ module.exports = env => {
                 {
                     test: /\.(png|jpg|gif)$/,
                     loader: 'url-loader',
-                    options: { limit: 1 } // Convert images < limit (byte) to base64 strings
+                    options: { name: 'assets/[hash:6]_[name].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
                 },
                 {
                     test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                    loader: 'file-loader'
+                    loader: 'file-loader',
+                    options: { name: 'assets/[hash:6]_[name].[ext]' }
                 },
                 {
                     test: /\.html$/,
@@ -64,7 +65,7 @@ module.exports = env => {
         },
         devtool: isProd ? false : 'inline-source-map',
         plugins: plugins,
-        devServer: {
-        }
+        // devServer: {
+        // }
     }
 }
