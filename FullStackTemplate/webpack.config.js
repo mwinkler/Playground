@@ -14,7 +14,7 @@ module.exports = env => {
 
     // production build plugins
     if (isProd) {
-        plugins.push(new ExtractText('[name].bundle.css'));
+        plugins.push(new ExtractText('[name].bundle-[hash:6].css'));
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             mangle: { screw_ie8: true },
             compress: { screw_ie8: true },
@@ -27,7 +27,7 @@ module.exports = env => {
             demo: './src/client/index.ts'
         },
         output: {
-            filename: '[name].bundle.js',
+            filename: '[name].bundle-[hash:6].js',
             path: path.resolve(__dirname, 'build', 'client')
         },
         module: {
@@ -35,7 +35,7 @@ module.exports = env => {
                 {
                     test: /\.tsx?$/,
                     loader: 'ts-loader',
-                    exclude: /node_modules/,
+                    exclude: /node_modules/
                 },
                 {
                     test: /\.s?css$/,
@@ -46,17 +46,19 @@ module.exports = env => {
                 {
                     test: /\.(png|jpg|gif)$/,
                     loader: 'url-loader',
-                    options: { name: 'assets/[hash:6]_[name].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
+                    options: { name: 'assets/[name]-[hash:6].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
                 },
                 {
                     test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                     loader: 'file-loader',
-                    options: { name: 'assets/[hash:6]_[name].[ext]' }
+                    options: { name: 'assets/[name]-[hash:6].[ext]' }
                 },
                 {
                     test: /\.html$/,
-                    loader: 'html-loader',
-                    options: { exportAsEs6Default: true }
+                    loader: 'html-loader?exportAsEs6Default',
+                    //loader: 'file-loader!extract-loader!html-loader?exportAsEs6Default',
+                    //options: { exportAsEs6Default: true }
+                    //exclude: 'index.html'
                 }
             ],
         },

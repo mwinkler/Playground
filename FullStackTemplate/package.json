@@ -11,7 +11,7 @@
     "clean-server": "rimraf build/server",
     "clean-client": "rimraf build/client",
     "docker-build": "docker build -t mwinkler/fullstackdemo ./",
-    "docker-run" : "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
+    "docker-run": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
     "docker-stop": "docker stop fullstackdemo && docker rm fullstackdemo"
   },
   "dependencies": {
@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@types/jquery": "^2.0.40",
-    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.1",
