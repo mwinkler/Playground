@@ -9,4 +9,5 @@ bin/
 obj/
 
 # .NET, Visual Studio
-project.lock.json
+.vs/
+*.csproj.user
