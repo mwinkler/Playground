@@ -5,8 +5,8 @@
   "license": "ISC",
   "scripts": {
     "build-client": "npm run clean-client && webpack --env=prod",
-    "build-server": "npm run clean-server && dotnet publish src/server -o ../../build/server -c release",
-    "start": "dotnet build/server/server.dll",
+    "build-server": "npm run clean-server && dotnet publish src/Frontend -o ../../build/server -c release",
+    "start": "dotnet build/server/Frontend.dll",
     "start-client": "webpack-dev-server",
     "clean-server": "rimraf build/server",
     "clean-client": "rimraf build/client",

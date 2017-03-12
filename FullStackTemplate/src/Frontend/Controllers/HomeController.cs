@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Server.Controllers
+namespace Frontend.Controllers
 {
     [Route("api/[controller]")]
     public class HomeController : Controller
