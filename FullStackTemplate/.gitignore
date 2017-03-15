@@ -11,3 +11,4 @@ obj/
 # .NET, Visual Studio
 .vs/
 *.csproj.user
+src/Frontend/wwwroot

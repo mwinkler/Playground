@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "src\Frontend\Frontend.csproj", "{69754EE4-291C-44C9-A765-B14D874B7042}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{387DB0C4-D92F-482A-A41D-5DC60A268A43}"
 	ProjectSection(SolutionItems) = preProject
 		package.json = package.json
+		webpack.config.js = webpack.config.js
 	EndProjectSection
 EndProject
 Global
