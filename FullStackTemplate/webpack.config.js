@@ -2,17 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 //const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
-const CleanWebpack = require('clean-webpack-plugin');
+const Clean = require('clean-webpack-plugin');
 const Html = require('html-webpack-plugin');
 
 // vars
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = (process.env.NODE_ENV === 'production');
 const src = 'src/Frontend/Client';
 const output = 'src/Frontend/wwwroot';
 
 // plugins
 const plugins = [
-    new CleanWebpack([output]),
+    new Clean([output]),
     new Html({ template: path.resolve(src, 'index.html') })
 ];
 
@@ -31,8 +31,9 @@ module.exports = {
         demo: path.resolve(src, 'index.ts')
     },
     output: {
+        path: path.resolve(__dirname, output),
+        //publicPath: 'build/',
         filename: '[name].bundle-[hash:6].js',
-        path: path.resolve(__dirname, output)
     },
     module: {
         rules: [
@@ -50,12 +51,12 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/,
                 loader: 'url-loader',
-                options: { name: 'assets/[name]-[hash:6].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
+                options: { name: '[name]-[hash:6].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
             },
             {
                 test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 loader: 'file-loader',
-                options: { name: 'assets/[name]-[hash:6].[ext]' }
+                options: { name: '[name]-[hash:6].[ext]' }
             },
             {
                 test: /\.html$/,

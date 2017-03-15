@@ -4,7 +4,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build-client": "set NODE_ENV=production && webpack",
+    "build-client": "set NODE_ENV=production&& webpack",
     "build-server": "npm run clean-server && dotnet publish src/Frontend -o ../../build/Frontend -c release",
     "start": "dotnet build/Frontend/Frontend.dll",
     "start-client": "webpack-dev-server",
