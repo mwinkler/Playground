@@ -4,6 +4,6 @@ EXPOSE 80
 
 ADD ./build /build
 
-#WORKDIR /app/server
+WORKDIR /build/Frontend
 
-ENTRYPOINT ["dotnet", "build/server/server.dll"]
+ENTRYPOINT ["dotnet", "Frontend.dll"]

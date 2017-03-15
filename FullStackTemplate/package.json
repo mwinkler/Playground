@@ -5,10 +5,10 @@
   "license": "ISC",
   "scripts": {
     "build-client": "set NODE_ENV=production && webpack",
-    "build-server": "npm run clean-server && dotnet publish src/Frontend -o ../../build/server -c release",
-    "start": "dotnet build/server/Frontend.dll",
+    "build-server": "npm run clean-server && dotnet publish src/Frontend -o ../../build/Frontend -c release",
+    "start": "dotnet build/Frontend/Frontend.dll",
     "start-client": "webpack-dev-server",
-    "clean-server": "rimraf build/server",
+    "clean-server": "rimraf build/Frontend",
     "docker-build": "docker build -t mwinkler/fullstackdemo ./",
     "docker-run": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
     "docker-stop": "docker stop fullstackdemo && docker rm fullstackdemo"
