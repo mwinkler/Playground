@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-//const Copy = require('copy-webpack-plugin');
 const ExtractText = require('extract-text-webpack-plugin');
 const Clean = require('clean-webpack-plugin');
 const Html = require('html-webpack-plugin');
@@ -12,8 +11,9 @@ const output = 'src/Frontend/wwwroot';
 
 // plugins
 const plugins = [
-    new Clean([output]),
-    new Html({ template: path.resolve(src, 'index.html') })
+    new Clean([path.resolve(output, '*')]),
+    new Html({ filename: 'index.html', chunks: ['index'] }),
+    new Html({ filename: 'demo.html', chunks: ['demo'] })
 ];
 
 // production build plugins
@@ -28,11 +28,11 @@ if (isProd) {
 
 module.exports = {
     entry: {
-        demo: path.resolve(src, 'index.ts')
+        index: path.resolve(src, 'index.ts'),
+        demo: path.resolve(src, 'demo.ts')
     },
     output: {
         path: path.resolve(__dirname, output),
-        //publicPath: 'build/',
         filename: '[name].bundle-[hash:6].js',
     },
     module: {
@@ -60,18 +60,16 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: 'html-loader?exportAsEs6Default',
-                //loader: 'file-loader!extract-loader!html-loader?exportAsEs6Default',
-                //options: { exportAsEs6Default: true }
-                //exclude: 'index.html'
+                loader: 'html-loader',
+                options: { exportAsEs6Default: true }
             }
         ],
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
-    devtool: isProd ? false : 'inline-source-map',
-    plugins: plugins,
-    // devServer: {
-    // }
+    devtool: isProd
+        ? false
+        : 'inline-source-map',
+    plugins: plugins
 }
