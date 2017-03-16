@@ -16,10 +16,17 @@
   },
   "dependencies": {
     "jquery": "^3.1.1",
-    "font-awesome": "^4.7.0"
+    "@types/jquery": "^2.0.40",
+    "font-awesome": "^4.7.0",
+    "react": "^15.4.2",
+    "react-dom": "15.4.2",
+    "@types/react": "",
+    "@types/react-dom": "",
+    "material-ui": "0.17.1",
+    "@types/material-ui": "",
+    "roboto-fontface": "0.7.0"
   },
   "devDependencies": {
-    "@types/jquery": "^2.0.40",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",

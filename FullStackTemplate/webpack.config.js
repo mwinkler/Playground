@@ -29,7 +29,7 @@ if (isProd) {
 module.exports = {
     entry: {
         index: path.resolve(src, 'index.ts'),
-        demo: path.resolve(src, 'demo.ts')
+        demo: path.resolve(src, 'demo.tsx')
     },
     output: {
         path: path.resolve(__dirname, output),
