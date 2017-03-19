@@ -1,11 +1,19 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 
 namespace Frontend.Controllers
 {
     [Route("api/[controller]")]
     public class HomeController : Controller
     {
+        private DemoContext _demoCtx;
+
+        public HomeController(DemoContext demoCtx)
+        {
+            _demoCtx = demoCtx;
+        }
+
         [Route("")]
         public string Index()
         {
@@ -14,13 +22,9 @@ namespace Frontend.Controllers
 
         [HttpGet]
         [Route("Users")]
-        public IEnumerable<object> Users()
+        public IEnumerable<User> Users()
         {
-            return new[]
-            {
-                new { Id = 1, Name = "User 1" },
-                new { Id = 2, Name = "User 2 "}
-            };
+            return _demoCtx.Users;
         }
     }
 }
