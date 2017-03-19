@@ -33,6 +33,7 @@ namespace Frontend
         {
             services.AddDbContext<DemoContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DemoConnection")));
+
             services.AddMvc();
         }
 
@@ -44,6 +45,7 @@ namespace Frontend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.ApplicationServices.GetRequiredService<DemoContext>().Database.EnsureCreated();
             }
 
             app.UseDefaultFiles();

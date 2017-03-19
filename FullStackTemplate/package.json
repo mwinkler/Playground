@@ -12,7 +12,8 @@
     "start": "cd build/Frontend && dotnet Frontend.dll",
     "docker-build": "docker build -t mwinkler/fullstackdemo ./",
     "docker-run": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
-    "docker-stop-remove": "docker stop fullstackdemo && docker rm fullstackdemo"
+    "docker-stop-remove": "docker stop fullstackdemo && docker rm fullstackdemo",
+    "database-run": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux"
   },
   "dependencies": {
     "jquery": "^3.1.1",
