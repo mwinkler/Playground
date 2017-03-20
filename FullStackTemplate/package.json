@@ -4,16 +4,18 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build-client-dev": "set NODE_ENV=development&& webpack",
-    "build-client-prod": "set NODE_ENV=production&& webpack",
-    "watch-client-dev": "set NODE_ENV=development&& webpack --watch",
-    "watch-client-prod": "set NODE_ENV=production&& webpack --watch",
+    "build-client__dev": "set NODE_ENV=development&& webpack",
+    "build-client__dev:watch": "set NODE_ENV=development&& webpack --watch",
+    "build-client__prod": "set NODE_ENV=production&& webpack",
+    "build-client__prod:watch": "set NODE_ENV=production&& webpack --watch",
     "build-server": "rimraf build/Frontend && dotnet publish src/Frontend -o ../../build/Frontend -c release",
-    "start": "cd build/Frontend && dotnet Frontend.dll",
-    "docker-build": "docker build -t mwinkler/fullstackdemo ./",
-    "docker-run": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
-    "docker-stop-remove": "docker stop fullstackdemo && docker rm fullstackdemo",
-    "database-run": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux"
+    "build-server-docker": "docker build -t mwinkler/fullstackdemo ./",
+    
+    "start-builded": "cd build/Frontend && dotnet Frontend.dll",
+    "start-builded-docker": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo",
+    "start-database-docker": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux",
+    
+    "docker-stop-remove": "docker stop fullstackdemo && docker rm fullstackdemo"
   },
   "dependencies": {
     "jquery": "^3.1.1",
