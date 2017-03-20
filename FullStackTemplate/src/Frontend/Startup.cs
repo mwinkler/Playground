@@ -22,7 +22,7 @@ namespace Frontend
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables()
+                //.AddEnvironmentVariables()
                 .Build();
         }
 
@@ -40,7 +40,9 @@ namespace Frontend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
+            loggerFactory
+                //.AddConsole()
+                .AddFile(Configuration.GetSection("Logging"));
 
             if (env.IsDevelopment())
             {
@@ -60,8 +62,6 @@ namespace Frontend
                 .UseKestrel()
                 .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                //.UseWebRoot("build/client")
-                //.UseApplicationInsights()
                 .UseStartup<Startup>()
                 .Build();
 

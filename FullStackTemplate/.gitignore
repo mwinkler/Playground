@@ -12,3 +12,6 @@ obj/
 .vs/
 *.user
 src/Frontend/wwwroot/
+
+# Logging output
+logs/
