@@ -13,7 +13,7 @@
 
     "start-builded": "cd build/Frontend && dotnet Frontend.dll",
     "start-builded-docker": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo && docker rm fullstackdemo",
-    "start-database-docker": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux",
+    "start-database-docker": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux"
   },
   "dependencies": {
     "jquery": "^3.1.1",
