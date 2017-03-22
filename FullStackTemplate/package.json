@@ -9,9 +9,9 @@
     "build-client__prod": "set NODE_ENV=production&& webpack",
     "build-client__prod:watch": "set NODE_ENV=production&& webpack --watch",
     "build-server": "rimraf build/Frontend && dotnet publish src/Frontend -o ../../build/Frontend -c release",
-    "build-server-docker": "docker build -t mwinkler/fullstackdemo ./",
-    "start-builded": "cd build/Frontend && dotnet Frontend.dll",
-    "start-builded-docker": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo && docker rm fullstackdemo",
+    "build-docker": "docker build -t my/fullstackdemo --build-arg source=./build/Frontend -f ./src/Frontend/Dockerfile .",
+    "start": "cd build/Frontend && dotnet Frontend.dll",
+    "start-docker": "docker run -p 5001:80 -i -t --name fullstackdemo my/fullstackdemo && docker rm fullstackdemo",
     "start-database-docker": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux"
   },
   "dependencies": {
