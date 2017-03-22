@@ -1,7 +1,7 @@
 ﻿
 import * as ReactDom from 'react-dom';
 import * as React from 'react';
-import 'roboto-fontface';
+//import 'roboto-fontface';
 
 import TestView from './views/view1';
 

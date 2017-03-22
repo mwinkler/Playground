@@ -10,21 +10,23 @@
     "build-client__prod:watch": "set NODE_ENV=production&& webpack --watch",
     "build-server": "rimraf build/Frontend && dotnet publish src/Frontend -o ../../build/Frontend -c release",
     "build-server-docker": "docker build -t mwinkler/fullstackdemo ./",
-
     "start-builded": "cd build/Frontend && dotnet Frontend.dll",
     "start-builded-docker": "docker run -p 5001:80 -i -t --name fullstackdemo mwinkler/fullstackdemo && docker rm fullstackdemo",
     "start-database-docker": "docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=TestPassw0rd' -p 1433:1433 -d microsoft/mssql-server-linux"
   },
   "dependencies": {
-    "jquery": "^3.1.1",
     "@types/jquery": "^2.0.40",
+    "@types/material-ui": "^0.16.57",
+    "@types/react": "^15.0.18",
+    "@types/react-dom": "^0.14.23",
+    "@types/redux": "^3.6.0",
+    "axios": "^0.15.3",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "material-ui": "0.17.1",
     "react": "^15.4.2",
     "react-dom": "15.4.2",
-    "@types/react": "",
-    "@types/react-dom": "",
-    "material-ui": "0.17.1",
-    "@types/material-ui": "",
+    "redux": "^3.6.0",
     "roboto-fontface": "0.7.0"
   },
   "devDependencies": {

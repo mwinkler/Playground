@@ -8,17 +8,20 @@ const Html = require('html-webpack-plugin');
 const isProd = (process.env.NODE_ENV === 'production');
 const src = 'src/Frontend/Client';
 const output = 'src/Frontend/wwwroot';
+const filename = `[name]${isProd ? '-[hash:6]' : ''}`;
+const filenameExt = filename + '.[ext]'
 
 // plugins
 const plugins = [
     new Clean([path.resolve(output, '*')]),
     new Html({ filename: 'index.html', chunks: ['index'] }),
-    new Html({ filename: 'demo.html', chunks: ['demo'] })
+    new Html({ filename: 'demo.html', chunks: ['demo'] }),
+    new Html({ filename: 'redux.html', chunks: ['redux'] })
 ];
 
 // production build plugins
 if (isProd) {
-    plugins.push(new ExtractText('[name].bundle-[hash:6].css'));
+    plugins.push(new ExtractText(filename + '.css'));
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         mangle: { screw_ie8: true },
         compress: { screw_ie8: true },
@@ -29,18 +32,27 @@ if (isProd) {
 module.exports = {
     entry: {
         index: path.resolve(src, 'index.ts'),
-        demo: path.resolve(src, 'demo.tsx')
+        demo: path.resolve(src, 'demo.tsx'),
+        redux: path.resolve(src, 'redux.tsx')
     },
     output: {
         path: path.resolve(__dirname, output),
-        filename: '[name].bundle-[hash:6].js',
+        filename: filename + '.js',
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                options: {
+                    compilerOptions: {
+                        lib: [
+                            "DOM",
+                            "ES2015"
+                        ]
+                    }
+                }
             },
             {
                 test: /\.s?css$/,
@@ -51,12 +63,12 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/,
                 loader: 'url-loader',
-                options: { name: '[name]-[hash:6].[ext]', limit: 1 } // Convert images < limit (byte) to base64 strings
+                options: { name: filenameExt, limit: 1 } // Convert images < limit (byte) to base64 strings
             },
             {
                 test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 loader: 'file-loader',
-                options: { name: '[name]-[hash:6].[ext]' }
+                options: { name: filenameExt }
             },
             {
                 test: /\.html$/,
