@@ -2,16 +2,13 @@
 import * as react from 'react'
 import * as reactDom from 'react-dom'
 import { createStore } from 'redux'
+import * as reducers from './reducers'
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'FETCH':
-            break;
-    }
+const store = createStore(reducers.Reducers);
 
-    return state;
-}
+store.subscribe(() => {
+    console.log('Store changed', store.getState());
+})
 
-const store = createStore(reducer);
-
-store.dispatch({ type: 'FETCH' });
+store.dispatch({ type: reducers.Actions.user.Fetch });
+store.dispatch({ type: reducers.Actions.user.Add });
