@@ -10,5 +10,12 @@ store.subscribe(() => {
     console.log('Store changed', store.getState());
 })
 
-store.dispatch({ type: reducers.Actions.user.Fetch });
-store.dispatch({ type: reducers.Actions.user.Add });
+store.dispatch({
+    type: reducers.Actions.users.Add,
+    user: { id: 1, name: 'Test' }
+});
+
+store.dispatch({
+    type: reducers.Actions.current.SetUset,
+    user: store.getState().users[0]
+});
