@@ -1,5 +1,5 @@
 ﻿
-import { createStore, combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 import * as user from './users'
 import * as current from './current'
 

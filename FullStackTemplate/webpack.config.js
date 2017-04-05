@@ -1,3 +1,4 @@
+
 const path = require('path');
 const webpack = require('webpack');
 const ExtractText = require('extract-text-webpack-plugin');
@@ -9,14 +10,14 @@ const isProd = (process.env.NODE_ENV === 'production');
 const src = 'src/Frontend/Client';
 const output = 'src/Frontend/wwwroot';
 const filename = `[name]${isProd ? '-[hash:6]' : ''}`;
-const filenameExt = filename + '.[ext]'
+const filenameExt = filename + '.[ext]';
 
 // plugins
 const plugins = [
     new Clean([path.resolve(output, '*')]),
     new Html({ filename: 'index.html', chunks: ['index'] }),
     new Html({ filename: 'demo.html', chunks: ['demo'] }),
-    new Html({ filename: 'redux.html', chunks: ['redux'] })
+    new Html({ filename: 'redux.html', chunks: ['redux-demo'] })
 ];
 
 // production build plugins
@@ -33,7 +34,7 @@ module.exports = {
     entry: {
         index: path.resolve(src, 'index.ts'),
         demo: path.resolve(src, 'demo.tsx'),
-        redux: path.resolve(src, 'redux.tsx')
+        redux: path.resolve(src, 'redux-demo.tsx')
     },
     output: {
         path: path.resolve(__dirname, output),
@@ -48,8 +49,8 @@ module.exports = {
                 options: {
                     compilerOptions: {
                         lib: [
-                            "DOM",
-                            "ES2015"
+                            "dom",
+                            "es2015"
                         ]
                     }
                 }

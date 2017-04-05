@@ -6,9 +6,10 @@
     "jsx": "react",
     "allowJs": true,
     "lib": [
-      "DOM",
-      "ES2015"
+      "dom",
+      "es2015"
     ]
   },
-  "exclude": ["node_modules"]
+  "include": [ "src", "modules.d.ts" ],
+  "exclude": [ "src/**/wwwroot", "src/**/obj" ]
 }
