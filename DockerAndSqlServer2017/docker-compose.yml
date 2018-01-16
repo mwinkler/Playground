@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  sqlserverdemo:
+    image: sqlserverdemo
+    build:
+      context: .
+      dockerfile: Console/Dockerfile
+    env_file:
+      - settings.env
+
+  sqlserver:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+    env_file:
+      - settings.env
+    ports:
+      - 8001:1433
+    volumes:
+      - .\db:/var/db
