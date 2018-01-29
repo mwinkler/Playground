@@ -13,6 +13,7 @@
     "parcel-bundler": "^1.4.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free-webfonts": "^1.0.2"
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.2",
+    "jquery": "^3.3.1"
   }
 }
