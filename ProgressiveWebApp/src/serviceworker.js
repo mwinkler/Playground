@@ -64,17 +64,17 @@ self.addEventListener('fetch', ev => {
 				console.info(`[ServiceWorker] Loading '${response.url}' from cache '${cacheName}'`);
 				
 				// If it's an HTML page change the response
-				if (response.headers.get('Content-Type') === 'text/html') {
-					return response.text().then(txt => {
-						let head = {
-							status: 200,
-							statusText: "OK",
-							headers: {'Content-Type': 'text/html'}
-						};
-						//let body = txt.replace(/<h1>/, '<h2>Diese Seite kommt aus dem Cache!</h2><h1>');
-						return new Response(body, head);
-					});
-				}
+				// if (response.headers.get('Content-Type') === 'text/html') {
+				// 	return response.text().then(txt => {
+				// 		let head = {
+				// 			status: 200,
+				// 			statusText: "OK",
+				// 			headers: {'Content-Type': 'text/html'}
+				// 		};
+				// 		//let body = txt.replace(/<h1>/, '<h2>Diese Seite kommt aus dem Cache!</h2><h1>');
+				// 		return new Response(txt, head);
+				// 	});
+				// }
 
 				return response;
             }
@@ -83,7 +83,7 @@ self.addEventListener('fetch', ev => {
 			return fetch(ev.request) 
                 .then(response => {
 
-					console.info(`[ServiceWorker] Loading '${ response.url}' from network`);
+					console.info(`[ServiceWorker] Loading '${response.url}' from network`);
 					
                     if (!response.ok) {
                         if (response.type === 'opaque')
