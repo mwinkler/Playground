@@ -1,0 +1,11 @@
+{
+  "name": "progressivwebapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serviceworker.js",
+  "scripts": {
+    "start": "serve --port 12500 ./src"
+  },
+  "author": "",
+  "license": "ISC"
+}

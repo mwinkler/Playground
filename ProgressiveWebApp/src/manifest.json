@@ -1,0 +1,10 @@
+{
+    "name": "PWA Demo App",
+    "short_name": "PWA Demo App",
+    "icons":[
+        { "src": "/assets/icon-48.png", "type": "image/png", "sizes": "48x48" },
+        { "src": "/assets/icon-192.png", "type": "image/png", "sizes": "192x192" }
+    ],
+    "display": "standalone",
+    "start_url": "/"
+}
