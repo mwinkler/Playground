@@ -15,7 +15,7 @@
     console.info('Registering ServiceWorker ...');
     
 	navigator.serviceWorker
-		.register('/serviceworker.js')
+		.register('./serviceworker.js')
 		.then(() => console.info('ServiceWorker has beed registered'))
         .catch(err => console.error('Error while register ServiceWorker', err));
 
