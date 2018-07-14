@@ -8,7 +8,7 @@ exports.push = (req, res) => {
     const payload = JSON.stringify({ title: 'Push Test' });
 
     // get all subscriptions
-    const subs = subscrptions.getAll();
+    const subs = subscrptions.get();
 
     console.log(`Found ${subs.length} subscrptions`);
 

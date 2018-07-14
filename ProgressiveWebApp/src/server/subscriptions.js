@@ -3,12 +3,12 @@ const path = require('path');
 const fs = require('fs');
 
 const dataPath = path.join(__dirname, "../../data/subscriptions.json");
-const isLoaded = false;
+let isLoaded = false;
 let data = [];
 
 function load() {
     
-    if (!fs.exists(dataPath))
+    if (!fs.existsSync(dataPath))
         return;
 
     const buf = fs.readFileSync(dataPath);
@@ -17,13 +17,19 @@ function load() {
 
 function save() {
 
-    const json = JSON.stringify(data);
+    const json = JSON.stringify(data, undefined, 2);
     fs.writeFileSync(dataPath, json);
 }
 
 function add(subscription) {
 
+    // check if endpoint already exists
+    if (data.find(d => d.endpoint === subscription.endpoint)) {
+        return;
+    }
+
     data.push(subscription);
+    
     save();
 }
 
