@@ -1,11 +1,16 @@
 {
-  "name": "progressivwebapp",
+  "name": "pwademoapp",
   "version": "1.0.0",
   "description": "",
   "main": "serviceworker.js",
   "scripts": {
-    "start": "serve --port 12500 ./src"
+    "start": "node ./src/server/index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "web-push": "^3.3.2"
+  }
 }
