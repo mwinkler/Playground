@@ -5,7 +5,7 @@ const helper = require('./helper');
 
 const blobContainer = 'pwa-demo';
 const dataPath = 'subscriptions.json';
-const fs = bluebird.promisifyAll(azure.createBlobService(process.env.APPSETTING_AZURE_STORAGE_ACCOUNT, process.env.APPSETTING_AZURE_STORAGE_KEY), helper.promisifyAzureSettings);
+const fs = bluebird.promisifyAll(azure.createBlobService(process.env.AZURE_STORAGE_ACCOUNT, process.env.AZURE_STORAGE_KEY), helper.promisifyAzureSettings);
 
 let data = [];
 
