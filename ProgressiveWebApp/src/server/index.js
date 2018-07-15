@@ -2,27 +2,27 @@ const express = require('express');
 const path = require('path');
 const webpush = require('web-push');
 const bodyParser = require('body-parser');
-const routeSubscribe = require('./routes/subscribe');
-const routePush = require('./routes/push');
 
-// config
-const port = process.env.PORT || 3000;
-const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QShLZ2Vz-utlJ3RXxQtfK3koqhWGYgwNRQ';
-const privateVapidKey = '0B22NrQH3DLygxIVV6bDTH4d3Q6K0t1xZ7utQ0Qa-yk';
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+require('./subscriptions-azure');
 
 // config middleware
 const app = express();
 app.use(bodyParser.json());
 
 // config webpush
-webpush.setVapidDetails('https://my-pwa.azurewebsites.net/', publicVapidKey, privateVapidKey);
+webpush.setVapidDetails('https://my-pwa.azurewebsites.net/', process.env.APPSETTING_VAPID_PUBLIC_KEY, process.env.APPSETTING_VAPID_PRIVATE_KEY);
 
 // static files
 app.use(express.static(path.join(__dirname, '../client')));
 
 // routes
-app.post('/subscribe', routeSubscribe.subscribe);
-app.post('/push', routePush.push);
+app.post('/subscribe', require('./routes/subscribe').route);
+app.post('/push', require('./routes/push').route);
+app.get('/env', require('./routes/env').route);
 
 // start server
-app.listen(port, () => console.log(`Example app listening on port ${port}`));
+app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));

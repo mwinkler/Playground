@@ -3,7 +3,8 @@
     "appService.zipIgnorePattern": [
         "data/*",
         ".vscode/*",
-        ".gitignore"
+        ".gitignore",
+        ".env"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/f6e3f13a-629b-411d-9ec0-252a5e54734b/resourceGroups/testing-linux/providers/Microsoft.Web/sites/my-pwa",
     "appService.deploySubpath": ""

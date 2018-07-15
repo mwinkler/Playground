@@ -1,8 +1,8 @@
 
 const webpush = require('web-push');
-const subscrptions = require('../subscriptions');
+const subscrptions = require('../subscriptions-azure');
 
-exports.push = (req, res) => {
+exports.route = (req, res) => {
 
     // Create payload
     const payload = JSON.stringify({ title: 'Push Test' });
