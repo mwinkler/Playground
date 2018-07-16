@@ -1,6 +1,17 @@
-//'use strict'
 
-(async function () {
+function urlBase64ToUint8Array(base64String) {
+	const padding = '='.repeat((4 - base64String.length % 4) % 4);
+	const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+	const rawData = window.atob(base64);
+	const outputArray = new Uint8Array(rawData.length);
+
+	for (let i = 0; i < rawData.length; ++i) {
+		outputArray[i] = rawData.charCodeAt(i);
+	}
+	return outputArray;
+}
+
+export async function registerServiceWorker() {
 
 	if (!('serviceWorker' in navigator)) {
 		alert('This Browser does not support ServiceWorkers.')
@@ -45,34 +56,5 @@
 		}
 	});
 	console.log('Subscription registered');
-})();
+};
 
-// dom ready
-document.addEventListener('DOMContentLoaded', () => {
-
-	// push button event
-	document.getElementById('push').addEventListener('click', async () => {
-
-		console.log('Push message...');
-		await fetch('/push', {
-			method: 'POST',
-			//body: JSON.stringify(subscription),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		console.log('Message pushed');
-	});
-});
-
-function urlBase64ToUint8Array(base64String) {
-	const padding = '='.repeat((4 - base64String.length % 4) % 4);
-	const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
-	const rawData = window.atob(base64);
-	const outputArray = new Uint8Array(rawData.length);
-
-	for (let i = 0; i < rawData.length; ++i) {
-		outputArray[i] = rawData.charCodeAt(i);
-	}
-	return outputArray;
-}
