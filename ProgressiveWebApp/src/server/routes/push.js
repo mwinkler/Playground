@@ -4,7 +4,7 @@ const subscrptions = require('../services/subscription');
 
 exports.route = async (req, res) => {
 
-    // Create payload
+    // create push message
     const payload = JSON.stringify({ title: 'Push Test' });
 
     // get all subscriptions

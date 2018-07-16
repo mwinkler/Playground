@@ -1,12 +1,8 @@
 
 const docuemtdb = require('documentdb');
-const bluebird = require('bluebird');
 const helper = require('../helper');
 
-const client = bluebird.promisifyAll(
-    new docuemtdb.DocumentClient(process.env.AZURE_COSMOSDB_ENDPOINT, { masterKey: process.env.AZURE_COSMOSDB_KEY }),
-    helper.promisifyAzureSettings);
-
+const client = helper.cosmosDbClient;
 const subscriptionsCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-demo', 'subscriptions');
 
 function add(subscription) {
@@ -18,11 +14,12 @@ function add(subscription) {
             return;
         }
 
+        // check if endpoint already exsist
         const query = {
             query: 'SELECT * FROM c WHERE c.endpoint = @endpoint',
             parameters: [{ name: '@endpoint', value: subscription.endpoint }]
         }
-
+        
         client.queryDocuments(subscriptionsCollection, query).toArray((err, result) => {
 
             if (err) { 

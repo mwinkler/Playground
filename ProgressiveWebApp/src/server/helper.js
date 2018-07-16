@@ -1,7 +1,8 @@
 
+const docuemtdb = require('documentdb');
+const bluebird = require('bluebird');
 
-/** @type string */
-exports.promisifyAzureSettings = {
+const promisifyAzureSettings = {
     promisifier: (originalFunction) => function (...args) {
         return new Promise((resolve, reject) => {
             try {
@@ -15,3 +16,10 @@ exports.promisifyAzureSettings = {
         });
     }
 };
+
+/** @type string */
+const cosmosDbClient = bluebird.promisifyAll(
+    new docuemtdb.DocumentClient(process.env.AZURE_COSMOSDB_ENDPOINT, { masterKey: process.env.AZURE_COSMOSDB_KEY }),
+    promisifyAzureSettings);
+
+exports.cosmosDbClient = cosmosDbClient;

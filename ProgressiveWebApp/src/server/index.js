@@ -22,5 +22,3 @@ app.post('/push', require('./routes/push').route);
 
 // start server
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
-
-require('./services/chat');
