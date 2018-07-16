@@ -1,6 +1,4 @@
-'use strict'
-
-const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QShLZ2Vz-utlJ3RXxQtfK3koqhWGYgwNRQ';
+//'use strict'
 
 (async function () {
 
@@ -24,11 +22,16 @@ const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QSh
 	await navigator.serviceWorker.ready;
 	console.log('Service worker registered');
 
+	// get public vapi key
+	console.log('Getting public vapid key')
+	const keyResponse = await (await fetch('/subscribe/key')).json();
+	console.log(`Recived vapid key '${keyResponse.key}'`)
+
 	// register push notification
 	console.log('Subscribe for push notification...');
 	const subscription = await register.pushManager.subscribe({
 		userVisibleOnly: true,
-		applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+		applicationServerKey: urlBase64ToUint8Array(keyResponse.key)
 	});
 	console.log('Push notification subscribed');
 

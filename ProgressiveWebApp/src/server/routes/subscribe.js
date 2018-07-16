@@ -1,7 +1,7 @@
 
 const subscrptions = require('../services/subscription');
 
-exports.route = (req, res) => {
+exports.post = (req, res) => {
 
     const subscription = req.body;
 
@@ -16,4 +16,9 @@ exports.route = (req, res) => {
     subscrptions.add(subscription);
 
     res.end();
+}
+
+exports.key = (req, res) => {
+
+    res.json({ key: process.env.VAPID_PUBLIC_KEY })
 }

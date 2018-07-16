@@ -17,7 +17,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
 // config routes
-app.post('/subscribe', require('./routes/subscribe').route);
+app.post('/subscribe', require('./routes/subscribe').post);
+app.get('/subscribe/key', require('./routes/subscribe').key);
 app.post('/push', require('./routes/push').route);
 
 // start server
