@@ -1,6 +1,10 @@
 
-import { registerServiceWorker } from './serviceworker-registration.js'
+import { registerServiceWorker, registerSubscription } from './serviceworker-registration.js'
 import { initUi } from './ui.js'
 
-registerServiceWorker();
+(async () => {
+    await registerServiceWorker();
+    await registerSubscription();
+})();
+
 initUi();

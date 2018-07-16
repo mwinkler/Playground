@@ -1,4 +1,6 @@
 
+import { postSubscribtion, getSubscriptionKey } from './api.js'
+
 function urlBase64ToUint8Array(base64String) {
 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
 	const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
@@ -25,36 +27,32 @@ export async function registerServiceWorker() {
 	
 	// register service worker
 	console.log('Registering service worker...');
-	const register = await navigator.serviceWorker.register('/serviceworker.js', {
-		scope: '/'
-	});
+	await navigator.serviceWorker.register('/serviceworker.js');
 	
 	// wait until service worker is ready
 	await navigator.serviceWorker.ready;
 	console.log('Service worker registered');
+};
+
+export async function registerSubscription() {
+
+	const register = await navigator.serviceWorker.getRegistration();
+
+	if (!register) {
+		throw 'Service worker registration not found'
+	}
 
 	// get public vapi key
-	console.log('Getting public vapid key')
-	const keyResponse = await (await fetch('/subscribe/key')).json();
-	console.log(`Recived vapid key '${keyResponse.key}'`)
+	const vapidKey = await getSubscriptionKey();
 
 	// register push notification
 	console.log('Subscribe for push notification...');
 	const subscription = await register.pushManager.subscribe({
 		userVisibleOnly: true,
-		applicationServerKey: urlBase64ToUint8Array(keyResponse.key)
+		applicationServerKey: urlBase64ToUint8Array(vapidKey)
 	});
 	console.log('Push notification subscribed');
 
 	// register subscription
-	console.log('Registering subscription...');
-	await fetch('/subscribe', {
-		method: 'POST',
-		body: JSON.stringify(subscription),
-		headers: {
-			'content-type': 'application/json'
-		}
-	});
-	console.log('Subscription registered');
-};
-
+	await postSubscribtion(subscription);
+}
