@@ -15,6 +15,5 @@ exports.route = (req, res) => {
     // store subscrption
     subscrptions.add(subscription);
 
-    // Send 201 - resource created
-    res.status(201).json({});
+    res.end();
 }

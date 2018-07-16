@@ -2,7 +2,7 @@
 
 const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QShLZ2Vz-utlJ3RXxQtfK3koqhWGYgwNRQ';
 
-+ async function () {
+(async function () {
 
 	if (!('serviceWorker' in navigator)) {
 		alert('This Browser does not support ServiceWorkers.')
@@ -13,12 +13,15 @@ const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QSh
 		console.info('Service worker already registered and running')
 		return;
 	}
-
+	
 	// register service worker
 	console.log('Registering service worker...');
 	const register = await navigator.serviceWorker.register('/serviceworker.js', {
 		scope: '/'
 	});
+	
+	// wait until service worker is ready
+	await navigator.serviceWorker.ready;
 	console.log('Service worker registered');
 
 	// register push notification
@@ -39,7 +42,7 @@ const publicVapidKey = 'BJqpL34rJaUdm2lG6o_Min8riEf6o6NLhCspZsTcHvtQhagg9O-68QSh
 		}
 	});
 	console.log('Subscription registered');
-}()
+})();
 
 // dom ready
 document.addEventListener('DOMContentLoaded', () => {
