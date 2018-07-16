@@ -2,7 +2,7 @@
 const webpush = require('web-push');
 const subscrptions = require('../services/subscription');
 
-exports.route = async (req, res) => {
+exports.post = async (req, res) => {
 
     // create push message
     const payload = JSON.stringify({ title: 'Push Test' });

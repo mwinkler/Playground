@@ -17,8 +17,3 @@ exports.post = (req, res) => {
 
     res.end();
 }
-
-exports.key = (req, res) => {
-
-    res.json({ key: process.env.VAPID_PUBLIC_KEY })
-}

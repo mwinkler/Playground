@@ -18,8 +18,8 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // config routes
 app.post('/subscribe', require('./routes/subscribe').post);
-app.get('/subscribe/key', require('./routes/subscribe').key);
-app.post('/push', require('./routes/push').route);
+app.post('/push', require('./routes/push').post);
+app.get('/subscribe/key', (req, res) => res.json({ key: process.env.VAPID_PUBLIC_KEY }));
 
 // start server
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
