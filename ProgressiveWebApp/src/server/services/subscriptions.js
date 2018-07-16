@@ -1,7 +1,7 @@
 
 const azure = require('azure-storage');
 const bluebird = require('bluebird');
-const helper = require('./helper');
+const helper = require('../helper');
 
 const blobContainer = 'pwa-demo';
 const dataPath = 'subscriptions.json';

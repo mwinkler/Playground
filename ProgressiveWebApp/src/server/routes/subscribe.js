@@ -1,5 +1,5 @@
 
-const subscrptions = require('../subscriptions-azure');
+const subscrptions = require('../services/subscriptions');
 
 exports.route = (req, res) => {
 
