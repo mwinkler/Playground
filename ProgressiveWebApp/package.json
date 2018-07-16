@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "azure-storage": "^2.10.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "documentdb": "^1.14.5",

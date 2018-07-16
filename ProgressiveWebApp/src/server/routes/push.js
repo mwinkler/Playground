@@ -1,14 +1,14 @@
 
 const webpush = require('web-push');
-const subscrptions = require('../services/subscriptions');
+const subscrptions = require('../services/subscription');
 
-exports.route = (req, res) => {
+exports.route = async (req, res) => {
 
     // Create payload
     const payload = JSON.stringify({ title: 'Push Test' });
 
     // get all subscriptions
-    const subs = subscrptions.get();
+    const subs = await subscrptions.get();
 
     console.log(`Found ${subs.length} subscrptions`);
 

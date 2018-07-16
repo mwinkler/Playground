@@ -1,5 +1,5 @@
 
-const subscrptions = require('../services/subscriptions');
+const subscrptions = require('../services/subscription');
 
 exports.route = (req, res) => {
 

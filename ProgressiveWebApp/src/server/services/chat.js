@@ -11,8 +11,9 @@ const chatsCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-de
 
 async function addMessage(data) {
 
-    if (!data || !data.message || !data.user)
-        throw 'Incorrect data'
+    if (!data || !data.message || !data.user) {
+        throw 'Message is invalid'
+    }
 
     data.timestamp = new Date();
 
