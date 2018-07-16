@@ -21,4 +21,6 @@ exports.route = async (req, res) => {
             .sendNotification(sub, payload)
             .catch(err => console.error(err));
     });
+
+    res.end();
 }

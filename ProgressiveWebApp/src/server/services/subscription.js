@@ -16,7 +16,7 @@ function add(subscription) {
 
         // check if endpoint already exsist
         const query = {
-            query: 'SELECT * FROM c WHERE c.endpoint = @endpoint',
+            query: 'SELECT * FROM sub WHERE sub.endpoint = @endpoint',
             parameters: [{ name: '@endpoint', value: subscription.endpoint }]
         }
         
@@ -47,7 +47,7 @@ function get() {
 
     return new Promise((resolve, reject) => {
 
-        client.queryDocuments(subscriptionsCollection, 'SELECT * FROM c').toArray((err, result) => {
+        client.queryDocuments(subscriptionsCollection, 'SELECT * FROM sub').toArray((err, result) => {
 
             if (err)
                 reject(err);
