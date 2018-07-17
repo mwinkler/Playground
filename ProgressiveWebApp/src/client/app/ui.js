@@ -7,12 +7,23 @@ export function initUi() {
 
     const app = new Vue({
         el: '#app',
+        data: {
+            isLoggedIn: false,
+            username: ''
+        },
         methods:{
 
-            push: async () => {
+            login: () => {
+
+                app.isLoggedIn = true;
+            },
+
+            post: async () => {
 
                 await postMessage();
             }
         }
-    });  
+    });
+
+    //app.$refs.username.focus();
 }

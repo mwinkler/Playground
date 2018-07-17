@@ -3,7 +3,7 @@ export async function postSubscribtion(subscription) {
 
     console.log('Registering subscription...');
 
-	await fetch('/subscribe', {
+	await fetch('/api/subscription', {
 		method: 'POST',
 		body: JSON.stringify(subscription),
 		headers: {
@@ -18,7 +18,7 @@ export async function postMessage(message) {
 
     console.log('Push message...');
 
-    await fetch('/push', {
+    await fetch('/api/message', {
         method: 'POST',
         //body: JSON.stringify(subscription),
         headers: {
@@ -33,7 +33,7 @@ export async function getSubscriptionKey() {
 
     console.log('Getting public vapid key');
 
-    const keyResponse = await fetch('/subscribe/key');
+    const keyResponse = await fetch('/api/key');
     const keyData = await keyResponse.json();
 
     console.log(`Recived vapid key '${keyData.key}'`);

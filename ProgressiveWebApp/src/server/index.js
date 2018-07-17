@@ -17,9 +17,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
 // config routes
-app.post('/subscribe', require('./routes/subscribe').post);
-app.post('/push', require('./routes/push').post);
-app.get('/subscribe/key', (req, res) => res.json({ key: process.env.VAPID_PUBLIC_KEY }));
+app.post('/api/subscription', require('./routes/subscribe').post);
+app.post('/api/message', require('./routes/push').post);
+app.get('/api/key', (req, res) => res.json({ key: process.env.VAPID_PUBLIC_KEY }));
 
 // start server
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
