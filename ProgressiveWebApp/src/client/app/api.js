@@ -24,11 +24,17 @@ export async function postMessage(message, userId) {
 
     console.log('Post message', message, userId);
 
-    await fetch('/api/message', {
+    const response = await fetch('/api/message', {
         method: 'POST',
         body: JSON.stringify({ message, userId }),
         headers: { 'content-type': 'application/json' }
     });
+
+    const messageResponse = await response.json();
+
+    console.log('Recived crated message', messageResponse);
+
+    return messageResponse;
 }
 
 export async function getMessages() {

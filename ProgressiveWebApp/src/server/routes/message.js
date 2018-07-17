@@ -40,7 +40,7 @@ exports.post = async (req, res) => {
                 .catch(err => console.error(err));
         });
     
-        res.end();
+        res.json(message);
     } 
     catch (error) {
         console.error(error);

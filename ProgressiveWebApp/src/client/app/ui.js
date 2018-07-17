@@ -31,7 +31,9 @@ export async function initUi() {
                 if (!app.message)
                     return;
 
-                await postMessage(app.message, app.user.id);
+                const message = await postMessage(app.message, app.user.id);
+
+                app.messages.push(message);
 
                 app.message = '';
             },
