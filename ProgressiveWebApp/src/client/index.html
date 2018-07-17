@@ -29,14 +29,10 @@
         <div class="container" v-if="isLoggedIn">
             <div class="row">
                 <div class="column">
-                    <div class="bubble me">
-                        <span class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, soluta. Animi recusandae sit blanditiis accusantium aperiam beatae, eveniet nemo ea dignissimos voluptates sed sapiente. Modi iure accusantium quae culpa minus!</span>
-                        <span class="user">Matthias</span>
+                    <div v-bind:class="['bubble', isMyMessage(message) ? 'me' : 'other']" v-for="message in messages">
+                        <span class="message">{{message.message}}</span>
+                        <span class="user">{{message.username}}</span>
                     </div>
-                    <div class="bubble other">
-                            <span class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, soluta. Animi recusandae sit blanditiis accusantium aperiam beatae, eveniet nemo ea dignissimos voluptates sed sapiente. Modi iure accusantium quae culpa minus!</span>
-                            <span class="user">Matthias</span>
-                        </div>
                 </div>
             </div>
             <form class="row" v-on:submit.prevent="post">

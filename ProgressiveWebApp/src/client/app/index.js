@@ -8,3 +8,7 @@ import { initUi } from './ui.js'
 })();
 
 initUi();
+
+navigator.serviceWorker.addEventListener('message', e => {
+    console.log('Recive sw message', e.data);
+});

@@ -1,7 +1,7 @@
 'use strict';
 
 const cacheName = 'app-v3'; // change when cached content is updated
-const pathRoot = '/' // change to your directory
+const pathRoot = '/'
 const filesToCache = [
 	/*'',
 	'app.js',
@@ -79,8 +79,16 @@ self.addEventListener('push', e => {
 
 	console.log('[ServiceWorker] Push recieved:', data);
 
-	self.registration.showNotification(data.title, {
-		body: 'by PWA Demo App',
+	self.registration.showNotification(data.message, {
+		body: data.username,
 		icon: 'https://my-pwa.azurewebsites.net/assets/icon-48.png'
+	});
+});
+
+self.addEventListener('message', e => {
+	console.log('[ServiceWorker] custom', e.data);
+	clients.matchAll().then(clients => {
+		console.log(`[ServiceWorker] Found ${clients.length} clients`);
+		clients.forEach(client => client.postMessage(e.data));
 	});
 });

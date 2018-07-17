@@ -26,14 +26,14 @@ exports.post = async (req, res) => {
     console.log(`Found ${subs.length} subscrptions`);
 
     // send push foreach each subscrption
-    // subs.forEach(sub => {
+    subs.forEach(sub => {
 
-    //     console.log('Send push notification to:', sub);
+        console.log('Send push notification to:', sub);
 
-    //     webpush
-    //         .sendNotification(sub, payload)
-    //         .catch(err => console.error(err));
-    // });
+        webpush
+            .sendNotification(sub, payload)
+            .catch(err => console.error(err));
+    });
 
     res.end();
 }

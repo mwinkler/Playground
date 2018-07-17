@@ -31,7 +31,9 @@ export function initUi() {
                 await postMessage(app.message, app.username);
 
                 app.message = '';
-            }
+            },
+
+            isMyMessage: message => message.username.toLowerCase() === app.username.toLowerCase()
         }
     });
 
