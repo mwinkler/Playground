@@ -1,5 +1,5 @@
 
-import { postMessage } from './api.js'
+import { postMessage, getMessages } from './api.js'
 
 export function initUi() {
 
@@ -9,21 +9,33 @@ export function initUi() {
         el: '#app',
         data: {
             isLoggedIn: false,
-            username: ''
+            username: '',
+            message: '',
+            messages: []
         },
         methods:{
 
-            login: () => {
+            login: async () => {
 
                 app.isLoggedIn = true;
+
+                // load messages
+                app.messages = await getMessages();
             },
 
             post: async () => {
 
-                await postMessage();
+                if (!app.message)
+                    return;
+
+                await postMessage(app.message, app.username);
+
+                app.message = '';
             }
         }
     });
+
+    
 
     //app.$refs.username.focus();
 }

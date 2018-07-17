@@ -39,14 +39,14 @@
                         </div>
                 </div>
             </div>
-            <div class="row">
+            <form class="row" v-on:submit.prevent="post">
                 <div class="columns ten">
-                    <input type="text" class="u-full-width" />
+                    <input type="text" class="u-full-width" v-model="message"/>
                 </div>
                 <div class="columns two">
-                    <button class="button button-primary" v-on:click="post">SAY</button>
+                    <button type="submit" class="button button-primary">SAY</button>
                 </div>
-            </div>
+            </form>
         </div>
 
     </div>

@@ -1,19 +1,19 @@
 
 const subscrptions = require('../services/subscription');
 
-exports.post = (req, res) => {
+exports.post = async (req, res) => {
 
     const subscription = req.body;
 
-    console.log('Subscribe request:', subscription)
+    console.log('Post subscription', subscription);
 
     if (!subscription.endpoint) {
-        res.status(500);
+        res.status(400).end();
         return;
     }
 
     // store subscrption
-    subscrptions.add(subscription);
+    await subscrptions.add(subscription);
 
     res.end();
 }

@@ -1,5 +1,5 @@
 
-import { postSubscribtion, getSubscriptionKey } from './api.js'
+import { postSubscribtion, getVapidKey } from './api.js'
 
 function urlBase64ToUint8Array(base64String) {
 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -43,7 +43,7 @@ export async function registerSubscription() {
 	}
 
 	// get public vapi key
-	const vapidKey = await getSubscriptionKey();
+	const vapidKey = await getVapidKey();
 
 	// register push notification
 	console.log('Subscribe for push notification...');

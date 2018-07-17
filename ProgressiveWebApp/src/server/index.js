@@ -1,24 +1,25 @@
+
+// load .env file (local)
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const webpush = require('web-push');
-const bodyParser = require('body-parser');
-
-// load .env file (local)
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
+const subscriptionRoute = require('./routes/subscription');
+const messageRoute = require('./routes/message');
 
 // config webpush
 webpush.setVapidDetails('https://my-pwa.azurewebsites.net/', process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY);
 
-// config middleware
+// middleware
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
-// config routes
-app.post('/api/subscription', require('./routes/subscribe').post);
-app.post('/api/message', require('./routes/push').post);
+// routing
+app.post('/api/subscription', subscriptionRoute.post);
+app.post('/api/message', messageRoute.post);
+app.get('/api/message', messageRoute.get);
 app.get('/api/key', (req, res) => res.json({ key: process.env.VAPID_PUBLIC_KEY }));
 
 // start server

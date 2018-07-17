@@ -7,4 +7,4 @@ body { padding: 1rem 0; }
 .bubble:after { content: ''; position: absolute; border-style: solid; display: block;width: 0;z-index: 1;top: 1rem; }
 .bubble.me:after { border-color: transparent #1EAEDB; right: -10px; border-width: 10px 0 10px 10px; }
 .bubble.other:after { border-color: transparent #f9f9f9; left: -10px; border-width: 10px 10px 10px 0; }
-.bubble .user { display: block; text-align: right; }
+.bubble .user { display: block; text-align: right; font-weight: bold; }

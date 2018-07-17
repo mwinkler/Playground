@@ -1,37 +1,39 @@
 
 export async function postSubscribtion(subscription) {
 
-    console.log('Registering subscription...');
+    console.log('Register subscription', subscription);
 
 	await fetch('/api/subscription', {
 		method: 'POST',
 		body: JSON.stringify(subscription),
-		headers: {
-			'content-type': 'application/json'
-		}
+		headers: { 'content-type': 'application/json' }
     });
-    
-	console.log('Subscription registered');
 }
 
-export async function postMessage(message) {
+export async function postMessage(message, username) {
 
-    console.log('Push message...');
+    console.log('Post message', message);
 
     await fetch('/api/message', {
         method: 'POST',
-        //body: JSON.stringify(subscription),
-        headers: {
-            'content-type': 'application/json'
-        }
+        body: JSON.stringify({ message, username }),
+        headers: { 'content-type': 'application/json' }
     });
-
-    console.log('Message pushed');
 }
 
-export async function getSubscriptionKey() {
+export async function getMessages() {
 
-    console.log('Getting public vapid key');
+    console.log('Get messages');
+
+    const response = await fetch('/api/message');
+    const messages = await response.json();
+
+    return messages;
+}
+
+export async function getVapidKey() {
+
+    console.log('Getting vapid key...');
 
     const keyResponse = await fetch('/api/key');
     const keyData = await keyResponse.json();
