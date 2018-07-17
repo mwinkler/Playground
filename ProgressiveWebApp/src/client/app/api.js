@@ -1,13 +1,23 @@
 
-export async function postSubscribtion(subscription) {
+export async function createUser(username, subscription) {
 
-    console.log('Register subscription', subscription);
+    console.log('Creating user', username, subscription);
 
-	await fetch('/api/subscription', {
+	const response = await fetch('/api/user', {
 		method: 'POST',
-		body: JSON.stringify(subscription),
+		body: JSON.stringify({ subscription, username }),
 		headers: { 'content-type': 'application/json' }
     });
+
+    if (!response.ok) {
+        throw await response.text()
+    }
+
+    const user = await response.json();
+
+    console.log('User created', user);
+
+    return user;
 }
 
 export async function postMessage(message, username) {

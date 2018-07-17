@@ -17,7 +17,7 @@
 <body>
     <div id="app">
 
-        <div v-if="!isLoggedIn" style="display: flex; justify-content: center; align-items: center; position: fixed; height: 100%;width:100%;">
+        <div v-if="!user" style="display: flex; justify-content: center; align-items: center; position: fixed; height: 100%;width:100%;">
             <form v-on:submit.prevent="login">
                 <h1><img src="assets/icon-48.png" style="vertical-align: middle" /> PWA CHAT</h1>
                 <label>Enter Your Name</label>
@@ -26,7 +26,7 @@
             </form>
         </div>
 
-        <div class="container" v-if="isLoggedIn">
+        <div class="container" v-if="user">
             <div class="row">
                 <div class="column">
                     <div v-bind:class="['bubble', isMyMessage(message) ? 'me' : 'other']" v-for="message in messages">

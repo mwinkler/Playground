@@ -3,9 +3,9 @@ const docuemtdb = require('documentdb');
 const helper = require('../helper');
 
 const client = helper.cosmosDbClient;
-const subscriptionsCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-demo', 'subscriptions');
+const usersCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-demo', 'users');
 
-function add(subscription) {
+function add(subscription, name) {
 
     return new Promise((resolve, reject) => {
 
@@ -14,13 +14,21 @@ function add(subscription) {
             return;
         }
 
+        if (!name) {
+            reject('Username is invalid');
+            return;
+        }
+
         // check if endpoint already exsist
         const query = {
-            query: 'SELECT * FROM sub WHERE sub.endpoint = @endpoint',
-            parameters: [{ name: '@endpoint', value: subscription.endpoint }]
+            query: 'SELECT * FROM user WHERE user.name = @name',
+            parameters: [
+                //{ name: '@endpoint', value: subscription.endpoint },
+                { name: '@name', value: name }
+            ]
         }
         
-        client.queryDocuments(subscriptionsCollection, query).toArray((err, result) => {
+        client.queryDocuments(usersCollection, query).toArray((err, result) => {
 
             if (err) { 
                 reject(err); 
@@ -28,16 +36,21 @@ function add(subscription) {
             }
 
             if (result.length > 0) {
-                resolve();
+                reject(`User '${name}' already exists`)
                 return;
             }
 
-            client.createDocument(subscriptionsCollection, subscription, (err2, result2) => {
+            const user = {
+                subscription,
+                name
+            }
+
+            client.createDocument(usersCollection, user, (err2, result2) => {
 
                 if (err2)
                     reject(err2); 
                 else
-                    resolve();
+                    resolve(result2);
             });
         });
     });
@@ -47,7 +60,7 @@ function get() {
 
     return new Promise((resolve, reject) => {
 
-        client.queryDocuments(subscriptionsCollection, 'SELECT * FROM sub').toArray((err, result) => {
+        client.queryDocuments(subscriptionsCollection, 'SELECT * FROM user').toArray((err, result) => {
 
             if (err)
                 reject(err);

@@ -5,7 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const webpush = require('web-push');
-const subscriptionRoute = require('./routes/subscription');
+const userRoute = require('./routes/user');
 const messageRoute = require('./routes/message');
 
 // config webpush
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
 // routing
-app.post('/api/subscription', subscriptionRoute.post);
+app.post('/api/user', userRoute.post);
 app.post('/api/message', messageRoute.post);
 app.get('/api/message', messageRoute.get);
 app.get('/api/key', (req, res) => res.json({ key: process.env.VAPID_PUBLIC_KEY }));

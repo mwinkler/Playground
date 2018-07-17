@@ -1,6 +1,6 @@
 
 const webpush = require('web-push');
-const subscrptions = require('../services/subscription');
+const users = require('../services/user');
 const messages = require('../services/message');
 
 exports.post = async (req, res) => {
@@ -20,18 +20,18 @@ exports.post = async (req, res) => {
     // create push message
     const payload = JSON.stringify(message);
 
-    // get all subscriptions
-    const subs = await subscrptions.get();
+    // get all users
+    const userList = await users.get();
 
-    console.log(`Found ${subs.length} subscrptions`);
+    console.log(`Found ${userList.length} users`);
 
-    // send push foreach each subscrption
-    subs.forEach(sub => {
+    // send push foreach each user
+    userList.forEach(user => {
 
-        console.log('Send push notification to:', sub);
+        console.log('Send push notification', user);
 
         webpush
-            .sendNotification(sub, payload)
+            .sendNotification(user.subscription, payload)
             .catch(err => console.error(err));
     });
 

@@ -1,26 +1,29 @@
 
 import { postMessage, getMessages } from './api.js'
+import { registerUser, getUser } from './service.js'
 
-export function initUi() {
+export async function initUi() {
 
     console.log('Init ui');
 
     const app = new Vue({
         el: '#app',
         data: {
-            isLoggedIn: false,
             username: '',
             message: '',
-            messages: []
+            messages: [],
+            user: getUser()
         },
         methods:{
 
             login: async () => {
 
-                app.isLoggedIn = true;
-
-                // load messages
-                app.messages = await getMessages();
+                try {
+                    app.user = await registerUser(app.username);
+                } 
+                catch (error) {
+                    alert(error);
+                }
             },
 
             post: async () => {
@@ -33,11 +36,12 @@ export function initUi() {
                 app.message = '';
             },
 
-            isMyMessage: message => message.username.toLowerCase() === app.username.toLowerCase()
+            isMyMessage: message => message.username.toLowerCase() === app.user.name.toLowerCase()
         }
     });
 
-    
+    // load messages
+    app.messages = await getMessages();
 
     //app.$refs.username.focus();
 }
