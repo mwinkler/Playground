@@ -20,13 +20,13 @@ export async function createUser(username, subscription) {
     return user;
 }
 
-export async function postMessage(message, username) {
+export async function postMessage(message, userId) {
 
-    console.log('Post message', message);
+    console.log('Post message', message, userId);
 
     await fetch('/api/message', {
         method: 'POST',
-        body: JSON.stringify({ message, username }),
+        body: JSON.stringify({ message, userId }),
         headers: { 'content-type': 'application/json' }
     });
 }

@@ -5,17 +5,30 @@ const helper = require('../helper');
 const client = helper.cosmosDbClient;
 const chatsCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-demo', 'messages');
 
-async function add(data) {
+function create(message, username) {
 
-    if (!isValid(data)) {
-        throw 'Message is invalid'
-    }
+    return new Promise((resolve, reject) => {
 
-    data.timestamp = new Date();
+        if (!message || !username) {
+            reject('Message or username is missing')
+        }
+    
+        const data = {
+            message: message,
+            username: username,
+            timestamp: new Date()
+        }
+    
+        client.createDocument(chatsCollection, data, (err, result) => {
 
-    await client.createDocumentAsync(chatsCollection, data);
+            if (err)
+                reject(err);
 
-    console.log('Save message to database');
+            console.log('Save message to database', result);
+
+            resolve(result);
+        });
+    });
 }
 
 function get() {
@@ -26,17 +39,11 @@ function get() {
             
             if (err) 
                 reject(err);
-            else
-                resolve(result);
+            
+            resolve(result);
         });
     });
 }
 
-function isValid(data) {
-
-    return !(!data || !data.message || !data.username)
-}
-
-exports.add = add;
+exports.create = create;
 exports.get = get;
-exports.isValid = isValid;

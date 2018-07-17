@@ -2,9 +2,9 @@
 body { padding: 1rem 0; }
 
 .bubble { position:relative; width:50%; padding: 0.5rem 1rem; border-radius: 10px; clear: both; margin-bottom: 1rem; }
-.bubble.me { color:#fff; background: #1EAEDB; float: right; }
+.bubble.me { color:#fff; background: #33C3F0; float: right; }
 .bubble.other { color:#333; background: #f9f9f9; float: left; }
 .bubble:after { content: ''; position: absolute; border-style: solid; display: block;width: 0;z-index: 1;top: 1rem; }
-.bubble.me:after { border-color: transparent #1EAEDB; right: -10px; border-width: 10px 0 10px 10px; }
+.bubble.me:after { border-color: transparent #33C3F0; right: -10px; border-width: 10px 0 10px 10px; }
 .bubble.other:after { border-color: transparent #f9f9f9; left: -10px; border-width: 10px 10px 10px 0; }
 .bubble .user { display: block; text-align: right; font-weight: bold; }

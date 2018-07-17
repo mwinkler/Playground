@@ -5,7 +5,7 @@ const helper = require('../helper');
 const client = helper.cosmosDbClient;
 const usersCollection = docuemtdb.UriFactory.createDocumentCollectionUri('pwa-demo', 'users');
 
-function add(subscription, name) {
+function create(subscription, name) {
 
     return new Promise((resolve, reject) => {
 
@@ -49,26 +49,40 @@ function add(subscription, name) {
 
                 if (err2)
                     reject(err2); 
-                else
-                    resolve(result2);
+                    
+                console.log('Save user to database', result2);
+                
+                resolve(result2);
             });
         });
     });
 }
 
-function get() {
+function get(id) {
+
+    const query = {
+        query: 'SELECT * FROM user'
+    }
+
+    if (id) {
+        query.query += ' WHERE user.id = @id';
+        query.parameters = [{ name: '@id', value: id }]
+    }
 
     return new Promise((resolve, reject) => {
 
-        client.queryDocuments(subscriptionsCollection, 'SELECT * FROM user').toArray((err, result) => {
+        client.queryDocuments(usersCollection, query).toArray((err, result) => {
 
-            if (err)
+            if (err) 
                 reject(err);
-            else
-                resolve(result);
+
+            if (id && result.length === 0)
+                reject(`User '${id}' not found`)
+            
+            resolve(id ? result[0] : result);
         });
     });
 }
 
-exports.add = add;
+exports.create = create;
 exports.get = get;

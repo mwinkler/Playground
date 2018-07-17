@@ -3,17 +3,18 @@ const users = require('../services/user');
 
 exports.post = async (req, res) => {
 
-    const payload = req.body;
-
-    console.log('Post user', payload);
-
     try {
+        const payload = req.body;
+    
+        console.log('Post user', payload);
+
         // create user
-        const user = await users.add(payload.subscription, payload.username);
+        const user = await users.create(payload.subscription, payload.username);
 
         res.json(user);
     }
     catch (error) {
+        console.error(error);
         res.status(500).send(error);
     }
 }

@@ -5,37 +5,47 @@ const messages = require('../services/message');
 
 exports.post = async (req, res) => {
 
-    const message = req.body;
+    try {
+        const data = req.body;
+    
+        console.log('Post message', data);
 
-    console.log('Post message', message);
+        // get user of message
+        const user = await users.get(data.userId);
+    
+        // create message
+        const message = await messages.create(data.message, user.name);
+    
+        // get all users
+        const userList = await users.get();
+        
+        console.log(`Found ${userList.length} users`);
+        
+        // create push message
+        const payload = JSON.stringify(message);
 
-    if (!messages.isValid(message)) {
-        res.status(400).end();
-        return;
+        // send push foreach each user
+        userList.forEach(user => {
+    
+            // do not send push notification to sender
+            if (user.id === data.userId) {
+                return;
+            }
+    
+            // send push notification
+            console.log('Send push notification', user);
+    
+            webpush
+                .sendNotification(user.subscription, payload)
+                .catch(err => console.error(err));
+        });
+    
+        res.end();
+    } 
+    catch (error) {
+        console.error(error);
+        res.status(500).send(error);
     }
-
-    // save message to db
-    await messages.add(message);
-
-    // create push message
-    const payload = JSON.stringify(message);
-
-    // get all users
-    const userList = await users.get();
-
-    console.log(`Found ${userList.length} users`);
-
-    // send push foreach each user
-    userList.forEach(user => {
-
-        console.log('Send push notification', user);
-
-        webpush
-            .sendNotification(user.subscription, payload)
-            .catch(err => console.error(err));
-    });
-
-    res.end();
 }
 
 exports.get = async (req, res) => {
