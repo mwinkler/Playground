@@ -4,10 +4,5 @@ import { initUi } from './ui.js'
 
 (async () => {
     await registerServiceWorker();
+    await initUi();
 })();
-
-initUi();
-
-// navigator.serviceWorker.addEventListener('message', e => {
-//     console.log('Recive sw message', e.data);
-// });

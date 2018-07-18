@@ -17,7 +17,7 @@ const promisifyAzureSettings = {
     }
 };
 
-/** @type string */
+
 const cosmosDbClient = bluebird.promisifyAll(
     new docuemtdb.DocumentClient(process.env.AZURE_COSMOSDB_ENDPOINT, { masterKey: process.env.AZURE_COSMOSDB_KEY }),
     promisifyAzureSettings);

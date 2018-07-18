@@ -1,6 +1,6 @@
 
 import { postMessage, getMessages } from './api.js'
-import { registerUser, getUser } from './service.js'
+import { registerUser, getUser, handleServiceWorkerEvent, callingServiceWorkerForMessageUpdate } from './service.js'
 
 export async function initUi() {
 
@@ -45,5 +45,9 @@ export async function initUi() {
     // load messages
     app.messages = await getMessages();
 
-    //app.$refs.username.focus();
+    // handle service worker events
+    handleServiceWorkerEvent(app);
+
+    // calling service worker to listen for push notifications
+    callingServiceWorkerForMessageUpdate(app);
 }

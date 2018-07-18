@@ -1,5 +1,5 @@
 
-import { createUser, getVapidKey } from './api.js'
+import { createUser, getVapidKey, getMessages } from './api.js'
 
 function urlBase64ToUint8Array(base64String) {
 	const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -15,22 +15,22 @@ function urlBase64ToUint8Array(base64String) {
 
 export async function registerServiceWorker() {
 
-	if (!('serviceWorker' in navigator)) {
+	if (!('serviceWorker' in window.navigator)) {
 		alert('This Browser does not support ServiceWorkers.')
 		return;
 	}
 
-	if (navigator.serviceWorker.controller) {
+	if (window.navigator.serviceWorker.controller) {
 		console.info('Service worker already registered and running')
 		return;
 	}
 	
 	// register service worker
 	console.log('Registering service worker...');
-	await navigator.serviceWorker.register('/serviceworker.js');
+	await window.navigator.serviceWorker.register('/serviceworker.js');
 	
 	// wait until service worker is ready
-	await navigator.serviceWorker.ready;
+	await window.navigator.serviceWorker.ready;
 	console.log('Service worker registered');
 };
 
@@ -77,4 +77,36 @@ export function getUser() {
 	const user = JSON.parse(data);
 
 	return user;
+}
+
+export function handleServiceWorkerEvent(app) {
+
+	window.navigator.serviceWorker.addEventListener('message', async e => {
+
+		console.log('Recive service worker message', e.data);
+
+		switch (e.data.action) {
+
+			case 'update-messages':
+
+				app.messages = await getMessages();
+
+				break;
+		}
+	});
+}
+
+export function callingServiceWorkerForMessageUpdate(app) {
+
+	setInterval(() => {
+
+		if (!window.navigator.serviceWorker.controller) {
+			return;
+		}
+
+		window.navigator.serviceWorker.controller.postMessage({
+			action: 'check-update-message',
+			timestamp: app.messages.length === 0 ? 0 : app.messages[app.messages.length - 1]._ts
+		})
+	}, 1000);
 }

@@ -9,6 +9,7 @@ const filesToCache = [
 	'assets/skeleton.css',
 	'assets/icon-48.png'*/
 ];
+let lastMessage = undefined;
 
 // triggers when installing
 self.addEventListener('install', ev => {
@@ -79,16 +80,35 @@ self.addEventListener('push', e => {
 
 	console.log('[ServiceWorker] Push recieved:', data);
 
+	// show notification
 	self.registration.showNotification(data.message, {
 		body: data.username,
 		icon: 'https://my-pwa.azurewebsites.net/assets/icon-48.png'
 	});
+
+	// save timestamp of last message
+	lastMessage = data._ts;
 });
 
+// triggers if the browser send a message
 self.addEventListener('message', e => {
-	console.log('[ServiceWorker] custom', e.data);
-	clients.matchAll().then(clients => {
-		console.log(`[ServiceWorker] Found ${clients.length} clients`);
-		clients.forEach(client => client.postMessage(e.data));
-	});
+
+	console.log('[ServiceWorker] Message', e.data);
+
+	switch(e.data.action) {
+
+		case 'check-update-message':
+
+			if (e.data.timestamp < lastMessage) {
+
+				clients.matchAll().then(clients => {
+					
+					console.log(`[ServiceWorker] Found ${clients.length} clients`);
+					
+					clients.forEach(client => client.postMessage({ action: 'update-messages' }));
+				});
+			}
+
+			break;
+	}
 });

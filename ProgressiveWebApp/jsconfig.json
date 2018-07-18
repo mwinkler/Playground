@@ -1,0 +1,19 @@
+{
+    "exclude": [
+        "node_modules"
+    ],
+    "compilerOptions": {
+        "checkJs": true,
+        "target": "es2018",
+        "lib": [
+            "es2015",
+            "es2016",
+            "es2017",
+            "es2018",
+            "dom",
+            "webworker"
+        ]
+        /*"module": "commonjs",
+        "moduleResolution": "node"*/
+    }
+}
