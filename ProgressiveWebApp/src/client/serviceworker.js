@@ -83,7 +83,10 @@ self.addEventListener('push', e => {
 	// show notification
 	self.registration.showNotification(data.message, {
 		body: data.username,
-		icon: 'https://my-pwa.azurewebsites.net/assets/icon-48.png'
+		icon: 'https://my-pwa.azurewebsites.net/assets/icon-48.png',
+		vibrate: [125],
+		badge: 'https://my-pwa.azurewebsites.net/assets/badge-72.png',
+		sound: 'https://my-pwa.azurewebsites.net/assets/notification.mp3'
 	});
 
 	// save timestamp of last message
@@ -102,7 +105,7 @@ self.addEventListener('message', e => {
 			if (e.data.timestamp < lastMessage) {
 
 				clients.matchAll().then(clients => {
-					
+
 					console.log(`[ServiceWorker] Found ${clients.length} clients`);
 					
 					clients.forEach(client => client.postMessage({ action: 'update-messages' }));
