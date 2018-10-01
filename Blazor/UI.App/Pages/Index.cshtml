@@ -1,5 +1,6 @@
 ﻿@using UI.App.Components
 @using UI.App.Services
+@using BlazorStrap
 @inject AppState State
 @page "/"
 
@@ -20,9 +21,24 @@
     <button onclick=@UpdateStateByServer>Update by API</button>
 </div>
 
+<div>
+    <button onclick=@(()=> IsOpen = true)>Open modal</button>
+</div>
+
+<Modal IsOpen=@IsOpen>
+    <ModalHeader>Modal title</ModalHeader>
+    <ModalBody><p>Modal body text goes here.</p></ModalBody>
+    <ModalFooter>
+        <BlazorButton Color="Color.Primary">Do Something</BlazorButton>
+        <BlazorButton Color="Color.Secondary" OnClick=@closeModal>Cancel</BlazorButton>
+    </ModalFooter>
+</Modal>
+
 @functions {
 
     private SimpleComponent _simpleComponent;
+
+    private bool IsOpen { get; set; }
 
     private void SetViaMethod()
     {
@@ -57,5 +73,11 @@
     private async Task UpdateStateByServer()
     {
         await State.UpdateByApi();
+    }
+
+    private void closeModal(UIMouseEventArgs e)
+    {
+        IsOpen = false;
+        StateHasChanged();
     }
 }

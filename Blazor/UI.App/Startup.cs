@@ -13,7 +13,7 @@ namespace UI.App
             // Since Blazor is running on the server, we can use an application service
             // to read the forecast data.
             services.AddSingleton<ApiService>();
-            services.AddHttpClient<ApiService>(client => client.BaseAddress = new Uri("http://localhost:65515/"));
+            services.AddHttpClient<ApiService>(client => client.BaseAddress = new Uri("http://localhost:65511/"));
             services.AddTransient<AppState>();
         }
 
