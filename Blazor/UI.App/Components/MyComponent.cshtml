@@ -1,0 +1,21 @@
+﻿<h1>My Component</h1>
+
+<input type="text" bind=@Name style="width:500px" />
+<label>Hi: @Name</label>
+<button onclick=@MyEvent>Fire MyEvent</button>
+
+@functions {
+
+    [Parameter]
+    private string Name { get; set; }
+
+    [Parameter]
+    private Action MyEvent { get; set; }
+
+    public void SetName(string name)
+    {
+        Name = name;
+        StateHasChanged();
+    }
+    
+}

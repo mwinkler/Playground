@@ -1,7 +1,38 @@
-﻿@page "/"
+﻿@using UI.App.Components
+@using UI.App.Services
+@inject AppState State
+@page "/"
 
-<h1>Hello, world!</h1>
+<MyComponent Name=@State.Name MyEvent=@OnComponentEvent ref="_myComponent"></MyComponent>
 
-Welcome to your new app.
+<div>
+    <button onclick=@SetViaMethod>Set name via component method</button>
+    <button onclick=@SetViaState>Set name via app state property</button>
+    <button onclick=@SetViaStateMethod>Set name via app state method</button>
+    <button onclick=@(() => StateHasChanged())>Fire StateHasChanged()</button>
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@functions {
+
+    private MyComponent _myComponent;
+
+    private void SetViaMethod()
+    {
+        _myComponent.SetName($"Changed by method {DateTime.Now}");
+    }
+
+    private void SetViaState()
+    {
+        State.Name = $"Changed by app state property {DateTime.Now}";
+    }
+
+    private void SetViaStateMethod()
+    {
+        State.SetName($"Changed by app state method {DateTime.Now}");
+    }
+
+    private void OnComponentEvent()
+    {
+        SetViaStateMethod();
+    }
+}
