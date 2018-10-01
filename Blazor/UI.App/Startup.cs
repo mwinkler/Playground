@@ -1,3 +1,5 @@
+using System;
+using System.Net.Http;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using UI.App.Services;
@@ -10,7 +12,8 @@ namespace UI.App
         {
             // Since Blazor is running on the server, we can use an application service
             // to read the forecast data.
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<ApiService>();
+            services.AddHttpClient<ApiService>(client => client.BaseAddress = new Uri("http://localhost:65515/"));
             services.AddTransient<AppState>();
         }
 

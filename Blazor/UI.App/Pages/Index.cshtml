@@ -17,6 +17,7 @@
 <div>
     <button onclick=@SetStateData>Set state data</button>
     <button onclick=@IncreaseAge>Increase age</button>
+    <button onclick=@UpdateStateByServer>Update by API</button>
 </div>
 
 @functions {
@@ -51,5 +52,10 @@
     private void IncreaseAge()
     {
         State.Data.Age++;
+    }
+
+    private async Task UpdateStateByServer()
+    {
+        await State.UpdateByApi();
     }
 }
