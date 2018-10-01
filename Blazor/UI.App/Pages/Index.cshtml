@@ -3,7 +3,7 @@
 @inject AppState State
 @page "/"
 
-<MyComponent Name=@State.Name MyEvent=@OnComponentEvent ref="_myComponent"></MyComponent>
+<SimpleComponent Name=@State.Name MyEvent=@OnComponentEvent ref="_simpleComponent"></SimpleComponent>
 
 <div>
     <button onclick=@SetViaMethod>Set name via component method</button>
@@ -12,13 +12,20 @@
     <button onclick=@(() => StateHasChanged())>Fire StateHasChanged()</button>
 </div>
 
+<ObjectComponent Data=@State.Data></ObjectComponent>
+
+<div>
+    <button onclick=@SetStateData>Set state data</button>
+    <button onclick=@IncreaseAge>Increase age</button>
+</div>
+
 @functions {
 
-    private MyComponent _myComponent;
+    private SimpleComponent _simpleComponent;
 
     private void SetViaMethod()
     {
-        _myComponent.SetName($"Changed by method {DateTime.Now}");
+        _simpleComponent.SetName($"Changed by method {DateTime.Now}");
     }
 
     private void SetViaState()
@@ -34,5 +41,15 @@
     private void OnComponentEvent()
     {
         SetViaStateMethod();
+    }
+
+    private void SetStateData()
+    {
+        State.Data = new ObjectComponentModel { Age = 1, Name = $"Hi at {DateTime.Now}" };
+    }
+
+    private void IncreaseAge()
+    {
+        State.Data.Age++;
     }
 }

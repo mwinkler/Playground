@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Components\ObjectComponent.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
