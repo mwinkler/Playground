@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace UI.Components
 {
-    public class ExampleJsInterop
+    internal class Component1Interop
     {
-        public static Task<string> Prompt(string message)
+        internal static Task<string> Prompt(string message)
         {
             // Implemented in exampleJsInterop.js
             return JSRuntime.Current.InvokeAsync<string>(

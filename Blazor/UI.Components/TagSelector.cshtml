@@ -1,0 +1,46 @@
+﻿<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")">
+    <div class="uic-tag-selector__box">
+        @if (SelectedItems != null)
+        {
+            foreach (var item in SelectedItems)
+            {
+                <span>
+                    @item.Value
+                    <span onclick=@(() => RemoveItem(item))>X</span>
+                </span>
+            }
+        }
+        <input type="text" onclick=@(() => { SelectionOpen = true; }) />
+    </div>
+    <div class="uic-tag-selector__dropdown">
+        @if (SelectableItems != null) 
+        {
+            foreach (var item in SelectableItems.Where(item => SelectedItems.All(sitem => sitem.Key != item.Key)))
+            {
+                <div onclick=@(() => AddSelected(item))>@item.Value</div>
+            }
+        }
+    </div>
+</div>
+
+@functions
+{
+
+    [Parameter] IEnumerable<TagSelectorItem> SelectableItems { get; set; }
+
+    [Parameter] IList<TagSelectorItem> SelectedItems { get; set; }
+
+    [Parameter] bool SelectionOpen { get; set; }
+
+    public void AddSelected(TagSelectorItem item)
+    {
+        SelectedItems.Add(item);
+        SelectionOpen = false;
+    }
+
+    public void RemoveItem(TagSelectorItem item)
+    {
+        SelectedItems.Remove(item);
+    }
+
+}

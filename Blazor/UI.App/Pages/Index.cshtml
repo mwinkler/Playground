@@ -1,6 +1,7 @@
 ﻿@using UI.App.Components
 @using UI.App.Services
 @using BlazorStrap
+@using UI.Components
 @inject AppState State
 @page "/"
 
@@ -30,11 +31,15 @@
     <ModalBody><p>Modal body text goes here.</p></ModalBody>
     <ModalFooter>
         <BlazorButton Color="Color.Primary">Do Something</BlazorButton>
-        <BlazorButton Color="Color.Secondary" OnClick=@closeModal>Cancel</BlazorButton>
+        <BlazorButton Color="Color.Secondary" OnClick=@CloseModal>Cancel</BlazorButton>
     </ModalFooter>
 </Modal>
 
 <Component1></Component1>
+
+<TagSelector SelectableItems=@State.SelectableItems SelectedItems=@State.SelectedItems></TagSelector>
+
+<button onclick=@CreateSelectableItems>Add Selectable Items</button>
 
 @functions {
 
@@ -77,9 +82,20 @@
         await State.UpdateByApi();
     }
 
-    private void closeModal(UIMouseEventArgs e)
+    private void CloseModal(UIMouseEventArgs e)
     {
         IsOpen = false;
         StateHasChanged();
+    }
+
+    private void CreateSelectableItems()
+    {
+        State.SelectableItems = new[]
+        {
+            new TagSelectorItem("Key 1", "Value 1"),
+            new TagSelectorItem("Key 2", "Value 2"),
+            new TagSelectorItem("Key 3", "Value 3"),
+            new TagSelectorItem("Key 4", "Value 4")
+        };
     }
 }
