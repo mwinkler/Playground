@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UI.Components\UI.Components.csproj" />
     <ProjectReference Include="..\UI.Shared\UI.Shared.csproj" />
   </ItemGroup>
 

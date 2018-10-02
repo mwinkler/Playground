@@ -1,0 +1,18 @@
+﻿<div class="my-component">
+    <button onclick=@InputName>Click Me</button>
+    @if (_name != null)
+    {
+        @:Hi @_name
+    }
+</div>
+
+@functions {
+
+    private string _name;
+
+    private async Task InputName()
+    {
+        _name = await ExampleJsInterop.Prompt("What is your name?");
+    }
+
+}
