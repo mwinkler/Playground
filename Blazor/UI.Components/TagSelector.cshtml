@@ -1,4 +1,4 @@
-﻿<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")">
+﻿<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")" onfocusout=@CloseSelection>
     <div class="uic-tag-selector__box">
         @if (SelectedItems != null)
         {
@@ -6,18 +6,18 @@
             {
                 <span>
                     @item.Value
-                    <span onclick=@(() => RemoveItem(item))>X</span>
+                    <span onclick=@(() => RemoveSelectedItem(item))>X</span>
                 </span>
             }
         }
-        <input type="text" onclick=@(() => { SelectionOpen = true; }) />
+        <input type="text" onfocus=@OpenSelection onkeyup=@OnTextKeypress bind="TextInput" />
     </div>
     <div class="uic-tag-selector__dropdown">
         @if (SelectableItems != null) 
         {
-            foreach (var item in SelectableItems.Where(item => SelectedItems.All(sitem => sitem.Key != item.Key)))
+            foreach (var item in GetFilteredSelection())
             {
-                <div onclick=@(() => AddSelected(item))>@item.Value</div>
+                <div onclick=@(() => AddSelectedItem(item))>@item.Value</div>
             }
         }
     </div>
@@ -28,19 +28,49 @@
 
     [Parameter] IEnumerable<TagSelectorItem> SelectableItems { get; set; }
 
-    [Parameter] IList<TagSelectorItem> SelectedItems { get; set; }
+    [Parameter] IList<TagSelectorItem> SelectedItems { get; set; } = new List<TagSelectorItem>();
 
     [Parameter] bool SelectionOpen { get; set; }
 
-    public void AddSelected(TagSelectorItem item)
+    [Parameter] string FilterText { get; set; }
+
+    private string TextInput = null;
+
+    public void AddSelectedItem(TagSelectorItem item)
     {
         SelectedItems.Add(item);
         SelectionOpen = false;
     }
 
-    public void RemoveItem(TagSelectorItem item)
+    public void RemoveSelectedItem(TagSelectorItem item)
     {
         SelectedItems.Remove(item);
     }
 
+    public void OpenSelection()
+    {
+        SelectionOpen = true;
+    }
+
+    public void CloseSelection()
+    {
+        SelectionOpen = false;
+    }
+
+    private void OnTextKeypress(UIKeyboardEventArgs e)
+    {
+        FilterText = TextInput;
+        Console.WriteLine($"OnKeyprss '{e.Key}' text: '{TextInput}'");
+        StateHasChanged();
+    }
+
+    private IEnumerable<TagSelectorItem> GetFilteredSelection()
+    {
+        return SelectableItems
+            .Where(item => SelectedItems.All(sitem => sitem.Key != item.Key)) // exclude selected
+            .Where(item => string.IsNullOrEmpty(FilterText) || item.Value?.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1)
+            .ToArray();
+    }
+
+    
 }
