@@ -1,4 +1,5 @@
-﻿<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")" onfocusout=@CloseSelection>
+﻿@using Microsoft.JSInterop
+<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")" onfocusout=@CloseSelection>
     <div class="uic-tag-selector__box">
         @if (SelectedItems != null)
         {
@@ -10,7 +11,7 @@
                 </span>
             }
         }
-        <input type="text" onfocus=@OpenSelection onkeyup=@OnTextKeypress bind="TextInput" />
+        <input type="text" onfocus=@OpenSelection onkeyup=@OnTextKeypress ref="TextBox" />
     </div>
     <div class="uic-tag-selector__dropdown">
         @if (SelectableItems != null) 
@@ -34,7 +35,7 @@
 
     [Parameter] string FilterText { get; set; }
 
-    private string TextInput = null;
+    private ElementRef TextBox;
 
     public void AddSelectedItem(TagSelectorItem item)
     {
@@ -57,10 +58,10 @@
         SelectionOpen = false;
     }
 
-    private void OnTextKeypress(UIKeyboardEventArgs e)
+    private async Task OnTextKeypress(UIKeyboardEventArgs e)
     {
-        FilterText = TextInput;
-        Console.WriteLine($"OnKeyprss '{e.Key}' text: '{TextInput}'");
+        FilterText = await JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.getValue", TextBox);
+
         StateHasChanged();
     }
 
@@ -72,5 +73,5 @@
             .ToArray();
     }
 
-    
+
 }

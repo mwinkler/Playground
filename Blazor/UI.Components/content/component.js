@@ -6,3 +6,9 @@ window.exampleJsFunctions = {
     return prompt(message, 'Type anything here');
   }
 };
+
+window.tagSelectorComponent = {
+    getValue: function (element) {
+        return element.value;
+    }
+};
