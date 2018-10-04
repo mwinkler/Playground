@@ -42,9 +42,9 @@
     public void AddSelectedTag(TagSelectorItem item, bool closeSelection)
     {
         SelectedTags.Add(item);
+        FilterText = "";
         UpdateSelectableItems();
         SelectionOpen = !closeSelection;
-        FilterText = "";
         JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.setValue", TextBox, "");
     }
 
@@ -79,6 +79,10 @@
 
             case "Enter":
                 AddSelectedTag(_selectableItems[_selectableIndex], false);
+                break;
+
+            case "Escape":
+                JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.blur", TextBox);
                 break;
 
             default:

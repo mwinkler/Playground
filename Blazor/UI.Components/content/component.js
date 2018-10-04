@@ -13,5 +13,8 @@ window.tagSelectorComponent = {
     },
     setValue: function(element, value) {
         element.value = value;
+    },
+    blur: function (element) {
+        element.blur();
     }
 };
