@@ -1,5 +1,5 @@
 ﻿@using Microsoft.JSInterop
-<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")" onfocusout=@CloseSelection>
+<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")">
     <div class="uic-tag-selector__box">
         @if (SelectedTags != null)
         {
@@ -11,7 +11,7 @@
                 </span>
             }
         }
-        <input type="text" onfocus=@OpenSelection onkeyup=@OnTextKeypress ref="TextBox" />
+        <input type="text" onfocus=@OpenSelection onblur=@CloseSelection onkeyup=@OnTextKeypress ref="TextBox" />
     </div>
     <div class="uic-tag-selector__dropdown">
         
@@ -45,7 +45,7 @@
         FilterText = "";
         UpdateSelectableItems();
         SelectionOpen = !closeSelection;
-        JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.setValue", TextBox, "");
+        JSRuntime.Current.InvokeAsync<object>("tagSelectorComponent.setValue", TextBox, "");
     }
 
     public void RemoveSelectedTag(TagSelectorItem item)
@@ -82,7 +82,7 @@
                 break;
 
             case "Escape":
-                JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.blur", TextBox);
+                await JSRuntime.Current.InvokeAsync<object>("tagSelectorComponent.blur", TextBox);
                 break;
 
             default:
