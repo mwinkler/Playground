@@ -37,7 +37,7 @@
 
 <Component1></Component1>
 
-<TagSelector SelectableItems=@State.SelectableItems SelectedItems=@State.SelectedItems></TagSelector>
+<TagSelector SelectableTags=@State.SelectableItems SelectedTags=@State.SelectedItems></TagSelector>
 
 <button onclick=@CreateSelectableItems>Add Selectable Items</button>
 
@@ -90,12 +90,12 @@
 
     private void CreateSelectableItems()
     {
-        State.SelectableItems = new[]
-        {
-            new TagSelectorItem("Key 1", "Value 1"),
-            new TagSelectorItem("Key 2", "Value 2"),
-            new TagSelectorItem("Key 3", "Value 3"),
-            new TagSelectorItem("Key 4", "Value 4")
-        };
+        //State.SelectableItems = new[]
+        //{
+        //    new TagSelectorItem("Key 1", "Value 1"),
+        //    new TagSelectorItem("Key 2", "Value 2"),
+        //    new TagSelectorItem("Key 3", "Value 3"),
+        //    new TagSelectorItem("Key 4", "Value 4")
+        //};
     }
 }

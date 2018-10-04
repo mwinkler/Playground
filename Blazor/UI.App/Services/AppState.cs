@@ -20,7 +20,14 @@ namespace UI.App.Services
 
         public ObjectComponentModel Data { get; set; }
 
-        public IEnumerable<TagSelectorItem> SelectableItems { get; set; }
+        public IEnumerable<TagSelectorItem> SelectableItems { get; set; } = new[]
+        {
+            new TagSelectorItem("Key 1", "Value 1"),
+            new TagSelectorItem("Key 2", "Value 2"),
+            new TagSelectorItem("Key 3", "Value 3"),
+            new TagSelectorItem("Key 4", "Value 4")
+        };
+
         public IList<TagSelectorItem> SelectedItems { get; } = new List<TagSelectorItem>();
 
         public void SetName(string name)
