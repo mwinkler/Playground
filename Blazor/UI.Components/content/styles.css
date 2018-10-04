@@ -13,5 +13,4 @@
 .uic-tag-selector__dropdown:hover .uic-tag-selector__item--selected { background-color: initial; }
 .uic-tag-selector__dropdown > div { cursor: pointer; }
 .uic-tag-selector__dropdown > div:hover { background-color: #ccc !important; }
-
 .uic-tag-selector--open > .uic-tag-selector__dropdown { display: block; }
