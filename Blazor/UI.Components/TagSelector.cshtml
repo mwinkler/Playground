@@ -17,7 +17,7 @@
         
         @foreach (var item in _selectableItems)
         {
-            <div class="@(_selectableItems.IndexOf(item) == _selectableIndex ? "uic-tag-selector__item--selected" : "")" onclick=@(() => AddSelectedTag(item, true))>@item.Value</div>
+            <div class="@(_selectableItems.IndexOf(item) == _selectableIndex ? "uic-tag-selector__item--selected" : "")" onmousedown=@(() => AddSelectedTag(item, true))>@item.Value</div>
         }
         
     </div>
