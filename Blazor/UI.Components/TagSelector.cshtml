@@ -1,5 +1,6 @@
 ﻿@using Microsoft.JSInterop
-<div class="uic-tag-selector @(SelectionOpen ? "uic-tag-selector--open" : "")">
+
+<div class="uic-tag-selector @(_selectionOpen ? "uic-tag-selector--open" : "")">
     <div class="uic-tag-selector__box">
         @if (SelectedTags != null)
         {
@@ -30,21 +31,18 @@
 
     [Parameter] IList<TagSelectorItem> SelectedTags { get; set; } = new List<TagSelectorItem>();
 
-    [Parameter] bool SelectionOpen { get; set; }
-
-    [Parameter] string FilterText { get; set; }
-
+    private bool _selectionOpen;
+    private string _filterText;
     private ElementRef TextBox;
-
     private int _selectableIndex = 0;
     private IList<TagSelectorItem> _selectableItems = new List<TagSelectorItem>();
 
     public void AddSelectedTag(TagSelectorItem item, bool closeSelection)
     {
         SelectedTags.Add(item);
-        FilterText = "";
+        _filterText = "";
         UpdateSelectableItems();
-        SelectionOpen = !closeSelection;
+        _selectionOpen = !closeSelection;
         JSRuntime.Current.InvokeAsync<object>("tagSelectorComponent.setValue", TextBox, "");
     }
 
@@ -57,12 +55,12 @@
     {
         UpdateSelectableItems();
         _selectableIndex = 0;
-        SelectionOpen = true;
+        _selectionOpen = true;
     }
 
     public void CloseSelection()
     {
-        SelectionOpen = false;
+        _selectionOpen = false;
     }
 
     private async Task OnTextKeypress(UIKeyboardEventArgs e)
@@ -78,7 +76,10 @@
                 break;
 
             case "Enter":
-                AddSelectedTag(_selectableItems[_selectableIndex], false);
+                if (_selectableItems.Any())
+                {
+                    AddSelectedTag(_selectableItems[_selectableIndex], false);
+                }
                 break;
 
             case "Escape":
@@ -86,7 +87,7 @@
                 break;
 
             default:
-                FilterText = await JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.getValue", TextBox);
+                _filterText = await JSRuntime.Current.InvokeAsync<string>("tagSelectorComponent.getValue", TextBox);
                 UpdateSelectableItems();
                 break;
         }
@@ -106,10 +107,8 @@
     {
         _selectableItems = (SelectableTags ?? _selectableItems)
             .Where(item => SelectedTags.All(sitem => sitem.Key != item.Key)) // exclude selected
-            .Where(item => string.IsNullOrEmpty(FilterText) || item.Value?.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1)
+            .Where(item => string.IsNullOrEmpty(_filterText) || item.Value?.IndexOf(_filterText, StringComparison.OrdinalIgnoreCase) != -1)
             .ToList();
     }
-
-
 
 }
