@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="MyState.fs" />
     <Compile Include="Library.fs" />
   </ItemGroup>
 

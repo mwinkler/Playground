@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorRedux;
+using MyLogic;
+using Blazor.Server.Redux;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Server.Data;
 
 namespace Server
 {
@@ -28,9 +27,10 @@ namespace Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
-            //services.AddReduxStore<MyState, IAction>(new MyState(), Reducers.RootReducer);
-            
+            services.AddReduxStore<MyState, MyMessage>(new MyState(0), MyFunctions.MyReducer, options =>
+            {
+                options.LocationActionCreator = location => MyMessage.NewChangeLocation(location);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor-Redux" Version="0.0.6" />
+    <ProjectReference Include="..\App\App.fsproj" />
+    <ProjectReference Include="..\Blazor.Redux\Blazor.Server.Redux\Blazor.Server.Redux.csproj" />
   </ItemGroup>
 
 </Project>
