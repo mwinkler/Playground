@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Blazor.Redux\Blazor.Server.Redux\Blazor.Server.Redux.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
 </Project>
