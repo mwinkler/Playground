@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shared;
+using Server.Service;
 
 namespace Server
 {
@@ -27,7 +29,8 @@ namespace Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddReduxStore<MyState, MyMessage>(new MyState(0), MyFunctions.MyReducer, options =>
+            services.AddSingleton<IApi, Api>();
+            services.AddReduxStore<MyState, MyMessage>(new MyState("", 0), MyFunctions.MyReducer, options =>
             {
                 options.LocationActionCreator = location => MyMessage.NewChangeLocation(location);
             });

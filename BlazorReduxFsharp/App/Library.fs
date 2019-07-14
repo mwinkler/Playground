@@ -2,8 +2,8 @@
 
 type MyState =
     {
+        Location: string;
         Count: int;
-
     }
 
 
@@ -19,4 +19,4 @@ module MyFunctions =
         match action with
             | IncrementByOne -> { state with Count = state.Count + 1 }
             | DecrementByOne -> { state with Count = state.Count - 1 }
-            | ChangeLocation location -> state
+            | ChangeLocation location -> { state with Location = location }

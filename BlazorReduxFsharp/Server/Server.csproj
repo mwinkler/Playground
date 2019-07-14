@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\App\App.fsproj" />
     <ProjectReference Include="..\Blazor.Redux\Blazor.Server.Redux\Blazor.Server.Redux.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
