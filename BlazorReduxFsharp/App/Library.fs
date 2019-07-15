@@ -18,12 +18,13 @@ type MyMessage =
     | Test of arg1 : string * arg2 : bool
     | ByModel of m : Model
     | AsyncDirect of string
+    | OtherState
     
 
 
 module MyFunctions =
 
-    let MyReducer state action =
+    let rec MyReducer state action =
         match action with
             | IncrementByOne -> { state with Count = state.Count + 1 }
             | DecrementByOne -> { state with Count = state.Count - 1 }
@@ -32,5 +33,7 @@ module MyFunctions =
             | Test (a1, a2) ->  { state with Name = a1 + a2.ToString() }
             | ByModel m -> state
             | AsyncDirect a -> { state with Name = Api.Instance.GetSomething(a) |> Async.AwaitTask |> Async.RunSynchronously }
-
+            | OtherState -> 
+                MyReducer state MyMessage.IncrementByOne 
+                |> fun ostate -> { ostate with Count = ostate.Count + 1 }
     
