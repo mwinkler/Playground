@@ -29,8 +29,8 @@ module MyFunctions =
             | DecrementByOne -> { state with Count = state.Count - 1 }
             | ChangeLocation location -> { state with Location = location }
             | GetByApi value -> { state with Name = Api.Instance.GetValue value }
-            | Test (a1, a2) -> state
+            | Test (a1, a2) ->  { state with Name = a1 + a2.ToString() }
             | ByModel m -> state
-            | AsyncDirect a -> { state with Name = Api.Instance.GetSomething a |> Async.AwaitTask |> Async.RunSynchronously }
+            | AsyncDirect a -> { state with Name = Api.Instance.GetSomething(a) |> Async.AwaitTask |> Async.RunSynchronously }
 
     

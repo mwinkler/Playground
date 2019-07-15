@@ -9,6 +9,8 @@
 
 <input @onchange="@(value => Dispatch(MyMessage.NewAsyncDirect((string)value.Value)))" />
 
+<button @onclick="@(() => Dispatch(MyMessage.NewTest("testvalue", false)))">Test</button>
+
 @State.Name
 
 <p>Location: @State.Location</p>
