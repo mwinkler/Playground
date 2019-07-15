@@ -1,9 +1,12 @@
 ﻿namespace MyLogic
 
+open Shared
+
 type MyState =
     {
         Location: string;
         Count: int;
+        Name: string;
     }
 
 
@@ -11,7 +14,12 @@ type MyMessage =
     | IncrementByOne
     | DecrementByOne
     | ChangeLocation of location : string
+    | GetByApi of string
+    | Test of arg1 : string * arg2 : bool
+    | ByModel of m : Model
+    | AsyncDirect of string
     
+
 
 module MyFunctions =
 
@@ -20,3 +28,9 @@ module MyFunctions =
             | IncrementByOne -> { state with Count = state.Count + 1 }
             | DecrementByOne -> { state with Count = state.Count - 1 }
             | ChangeLocation location -> { state with Location = location }
+            | GetByApi value -> { state with Name = Api.Instance.GetValue value }
+            | Test (a1, a2) -> state
+            | ByModel m -> state
+            | AsyncDirect a -> { state with Name = Api.Instance.GetSomething a |> Async.AwaitTask |> Async.RunSynchronously }
+
+    

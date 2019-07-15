@@ -7,4 +7,8 @@
 
 <button class="btn btn-primary" @onclick="@(() => Dispatch(MyMessage.IncrementByOne))">Click me</button>
 
+<input @onchange="@(value => Dispatch(MyMessage.NewAsyncDirect((string)value.Value)))" />
+
+@State.Name
+
 <p>Location: @State.Location</p>
