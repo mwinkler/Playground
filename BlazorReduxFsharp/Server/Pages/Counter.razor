@@ -11,6 +11,8 @@
 
 <button @onclick="@(() => Dispatch(MyMessage.NewTest("testvalue", false)))">Test</button>
 
+<button @onclick="@(() => Dispatch(MyMessage.NewStateResponse(new global::Shared.Request { Success = true, Message = "GetResponse" })))">GetResponse</button>
+
 @State.Name
 
 <p>Location: @State.Location</p>

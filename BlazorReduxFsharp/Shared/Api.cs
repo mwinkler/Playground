@@ -15,5 +15,19 @@ namespace Shared
         }
 
         public string GetValue(string value) => value;
+
+        public Task<Response<Model>> GetResponse(Request request)
+        {
+            return Task.FromResult(new Response<Model>
+            {
+                Message = request.Message,
+                Success = request.Success,
+                Value = new Model
+                {
+                    Age = 99,
+                    Name = request.Message
+                }
+            });
+        }
     }
 }

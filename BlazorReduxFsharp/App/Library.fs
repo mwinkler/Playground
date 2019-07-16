@@ -19,6 +19,7 @@ type MyMessage =
     | ByModel of m : Model
     | AsyncDirect of string
     | OtherState
+    | StateResponse of request : Request
     
 
 
@@ -36,4 +37,10 @@ module MyFunctions =
             | OtherState -> 
                 MyReducer state MyMessage.IncrementByOne 
                 |> fun ostate -> { ostate with Count = ostate.Count + 1 }
+            | StateResponse request ->
+                Api.Instance.GetResponse(request) |> Async.AwaitTask |> Async.RunSynchronously
+                |> fun response ->
+                    match response.Success with
+                        | true -> { state with Name = response.Value.Name; Count = response.Value.Age }
+                        | _ ->  { state with Name = "Failed" }
     
