@@ -7,12 +7,7 @@ namespace Shared
 {
     public class Api : IApi
     {
-        public static Api Instance { get; } = new Api();
-
-        public Task<string> GetSomething(string value)
-        {
-            return Task.FromResult(value);
-        }
+        public Task<string> GetSomething(string value) => Task.FromResult(value);
 
         public string GetValue(string value) => value;
 

@@ -23,22 +23,22 @@ type MyMessage =
     
 
 
-module MyFunctions =
+type MyFunctions (api: IApi) =
 
-    let rec MyReducer state action =
+    member this.MyReducer state action =
         match action with
             | IncrementByOne -> { state with Count = state.Count + 1 }
             | DecrementByOne -> { state with Count = state.Count - 1 }
             | ChangeLocation location -> { state with Location = location }
-            | GetByApi value -> { state with Name = Api.Instance.GetValue value }
+            | GetByApi value -> { state with Name = api.GetValue value }
             | Test (a1, a2) ->  { state with Name = a1 + a2.ToString() }
             | ByModel m -> state
-            | AsyncDirect a -> { state with Name = Api.Instance.GetSomething(a) |> Async.AwaitTask |> Async.RunSynchronously }
+            | AsyncDirect a -> { state with Name = api.GetSomething(a) |> Async.AwaitTask |> Async.RunSynchronously }
             | OtherState -> 
-                MyReducer state MyMessage.IncrementByOne 
+                this.MyReducer state MyMessage.IncrementByOne 
                 |> fun ostate -> { ostate with Count = ostate.Count + 1 }
             | StateResponse request ->
-                Api.Instance.GetResponse(request) |> Async.AwaitTask |> Async.RunSynchronously
+                api.GetResponse(request) |> Async.AwaitTask |> Async.RunSynchronously
                 |> fun response ->
                     match response.Success with
                         | true -> { state with Name = response.Value.Name; Count = response.Value.Age }

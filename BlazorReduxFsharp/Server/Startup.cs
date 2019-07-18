@@ -28,8 +28,7 @@ namespace Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<IApi, Api>();
-            services.AddReduxStore<MyState, MyMessage>(new MyState("", 0, null), MyFunctions.MyReducer, options =>
+            services.AddReduxStore<MyState, MyMessage>(new MyState("", 0, null), new MyFunctions(new Api()).MyReducer, options =>
             {
                 options.LocationActionCreator = location => MyMessage.NewChangeLocation(location);
             });
