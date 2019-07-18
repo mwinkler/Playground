@@ -2,11 +2,18 @@
 
 open Shared
 
+type SubState =
+    {
+        Message: string;
+        Success: bool;
+    }
+
 type MyState =
     {
         Location: string;
         Count: int;
         Name: string;
+        Substate: SubState;
     }
 
 
@@ -41,6 +48,6 @@ type MyFunctions (api: IApi) =
                 api.GetResponse(request) |> Async.AwaitTask |> Async.RunSynchronously
                 |> fun response ->
                     match response.Success with
-                        | true -> { state with Name = response.Value.Name; Count = response.Value.Age }
-                        | _ ->  { state with Name = "Failed" }
+                        | true -> { state with Substate = { Success = true; Message = response.Message } }
+                        | _ ->  { state with Substate = { Success = false; Message = response.Message } }
     
