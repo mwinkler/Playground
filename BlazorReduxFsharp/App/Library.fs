@@ -8,12 +8,17 @@ type SubState =
         Success: bool;
     }
 
+type NullState =
+    | Null
+    | Data of string
+
 type MyState =
     {
         Location: string;
         Count: int;
         Name: string;
         Substate: SubState;
+        Content : NullState
     }
 
 
@@ -27,6 +32,8 @@ type MyMessage =
     | AsyncDirect of string
     | OtherState
     | StateResponse of request : Request
+    | SetData of string
+    | SetNull
     
 
 
@@ -50,4 +57,6 @@ type MyFunctions (api: IApi) =
                     match response.Success with
                         | true -> { state with Substate = { Success = true; Message = response.Message } }
                         | _ ->  { state with Substate = { Success = false; Message = response.Message } }
+            | SetData data -> { state with Content = NullState.Data data }
+            | SetNull -> { state with Content = NullState.Null }
     

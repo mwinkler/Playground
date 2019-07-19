@@ -18,3 +18,14 @@
 <p>Success: @State.Substate.Success (@State.Substate.Message)</p>
 
 <p>Location: @State.Location</p>
+
+@if (State.Content == NullState.Null)
+{
+    <div>NULL</div>
+    <button @onclick="@(() => Dispatch(MyMessage.NewSetData("Data Set")))">Set</button>
+}
+else
+{
+    <div>@((State.Content as NullState.Data).Item)</div>
+    <button @onclick="@(() => Dispatch(MyMessage.SetNull))">Set</button>
+}
