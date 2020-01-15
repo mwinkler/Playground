@@ -59,4 +59,9 @@ type MyFunctions (api: IApi) =
                         | _ ->  { state with Substate = { Success = false; Message = response.Message } }
             | SetData data -> { state with Content = NullState.Data data }
             | SetNull -> { state with Content = NullState.Null }
+
+    member this.AsynReducer (state : MyState) (action) = async {
+        return match action with
+            | IncrementByOne -> state
+    }
     
