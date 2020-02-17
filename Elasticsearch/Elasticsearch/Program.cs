@@ -1,6 +1,8 @@
 ﻿using Bogus;
 using Nest;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Elasticsearch
 {
@@ -11,12 +13,29 @@ namespace Elasticsearch
 
         static void Main(string[] args)
         {
-            Create();
+            Settings.DefaultMappingFor<User>(map => map.IndexName("users"));
+            
+            //Create();
+            Search();
         }
 
-        static void Read()
+        static void Search()
         {
+            //var result = Client.Search<User>(s =>
+            //    s.Query(q => q
+            //        .Match(m => m
+            //            .Field(f => f.Name)
+            //            .Query("Allison")))
+            //);
 
+            var result = Client.Search<User>(s =>
+                s.Query(q => q
+                    .Fuzzy(m => m
+                        .Field(f => f.Name)
+                        .Value("Allison")))
+            );
+
+            Console.WriteLine(JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
         }
 
         static void Create()
@@ -27,7 +46,7 @@ namespace Elasticsearch
                 .RuleFor(p => p.Mail, f => f.Internet.Email())
                 .Generate(1000);
 
-            var respoinse = Client.IndexMany(users, "users");
+            var respoinse = Client.IndexMany(users);
             //var response = Client.Index(user, idx => idx.Index("users"));
         }
     }
