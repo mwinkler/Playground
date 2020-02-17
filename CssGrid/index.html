@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sample-1 { 
+            display: inline-grid; 
+            /* grid-template-columns: 1fr 50% 1fr; */
+            /* grid-template-rows: auto auto auto; */
+            /* grid-column-start: 3; */
+        }
+        .sample-1 > img {
+            grid-area: 1 / 1 / span 3;
+        }
+        .sample-1 > header {
+            background-color: #ffffff33;
+            grid-area: 1 / 1;
+            justify-self: end;
+            padding: 0.25rem;
+        }
+        .sample-1 > footer {
+            background-color: #ffffff33;
+            grid-area: 3 / 1;
+        }
+
+        .sample-2 { display: inline-grid; }
+        .sample-2 > img { grid-area: 1 / 1 / 4 / 4; }
+        .sample-2 > div { grid-area: 2 / 2; color:white; }
+    </style>
+</head>
+<body>
+    <div class="sample-1">
+        <img src="https://picsum.photos/seed/2/300/300" />
+        <header>
+            1
+        </header>
+        <footer>
+            2
+        </footer>
+    </div>
+    <div class="sample-2">
+        <img src="https://picsum.photos/seed/2/300/300" />
+        <div>Content</div>
+    </div>
+</body>
+</html>
