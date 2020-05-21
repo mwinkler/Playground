@@ -32,14 +32,12 @@ spec:
         - --accesslog
         - --entrypoints.web.Address=:80
         - --entrypoints.websecure.address=:443
-        #- --entrypoints.websecure.http.tls.certResolver=myresolver
         - --entrypoints.tcpep.address=:8000
         - --providers.kubernetescrd    # custom resource definition
         - --providers.kubernetesingress
         - --certificatesresolvers.myresolver.acme.tlschallenge
         - --certificatesresolvers.myresolver.acme.email=mwinkler@gmx.ch
         - --certificatesresolvers.myresolver.acme.storage=acme.json
-        #- --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
         resources:
           limits:
             memory: 128Mi
