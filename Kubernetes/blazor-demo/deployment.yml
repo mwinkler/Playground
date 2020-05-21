@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazor-demo
+spec:
+  selector:
+    matchLabels:
+      app: blazor-demo
+  template:
+    metadata:
+      labels:
+        app: blazor-demo
+    spec:
+      containers:
+      - name: blazor-demo
+        image: mwinkler/blazor-components-demo
+        resources:
+          limits:
+            memory: 64Mi
+            cpu: 100m
+        ports:
+        - containerPort: 80

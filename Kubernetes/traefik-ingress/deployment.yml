@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: traefik-ingress
+  labels:
+    app: traefik-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik-ingress
+  template:
+    metadata:
+      labels:
+        app: traefik-ingress
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      containers:
+      - name: traefik
+        image: traefik
+        ports:
+        - name: web
+          containerPort: 80
+        - name: tcp
+          containerPort: 8000
+        - name: admin
+          containerPort: 8080
+        - name: websecure
+          containerPort: 443
+        args:
+        - --api.insecure
+        - --accesslog
+        - --entrypoints.web.Address=:80
+        - --entrypoints.websecure.address=:443
+        #- --entrypoints.websecure.http.tls.certResolver=myresolver
+        - --entrypoints.tcpep.address=:8000
+        - --providers.kubernetescrd    # custom resource definition
+        - --providers.kubernetesingress
+        - --certificatesresolvers.myresolver.acme.tlschallenge
+        - --certificatesresolvers.myresolver.acme.email=mwinkler@gmx.ch
+        - --certificatesresolvers.myresolver.acme.storage=acme.json
+        #- --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 100m
