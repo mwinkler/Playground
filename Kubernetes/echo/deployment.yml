@@ -1,20 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blazor-demo
+  name: echo
 spec:
   selector:
     matchLabels:
-      app: blazor-demo
+      app: echo
   template:
     metadata:
       labels:
-        app: blazor-demo
+        app: echo
     spec:
       containers:
-      - name: blazor-demo
-        image: mwinkler/blazor-components-demo
-        imagePullPolicy: Always
+      - name: echo
+        image: mendhak/http-https-echo
         resources:
           limits:
             memory: 64Mi
