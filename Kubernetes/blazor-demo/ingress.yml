@@ -12,6 +12,8 @@ spec:
     services:
     - name: blazor-demo
       port: 80
+    middlewares:
+    - name: force-https
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
