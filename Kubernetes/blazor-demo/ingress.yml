@@ -10,10 +10,10 @@ spec:
   - match: Host(`blazor.mwinkler.ga`)
     kind: Rule
     services:
-    - name: blazor-demo
-      port: 80
+    - kind: TraefikService
+      name: noop@internal
     middlewares:
-    - name: force-https
+    - name: https-redirect
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
