@@ -1,0 +1,36 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: elasticsearch-ingress
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`elastic.mwinkler.ga`)
+    kind: Rule
+    services:
+    - kind: TraefikService
+      name: noop@internal
+    middlewares:
+    - name: https-redirect
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: elasticsearch-ingress-tls
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`elastic.mwinkler.ga`)
+    kind: Rule
+    services:
+    - name: elsaticsearch
+      port: 9200
+    middlewares:
+    - name: auth
+  tls:
+    certResolver: myresolver

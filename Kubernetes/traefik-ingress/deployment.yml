@@ -21,18 +21,17 @@ spec:
         ports:
         - name: web
           containerPort: 80
-        - name: tcp
-          containerPort: 8000
-        - name: admin
-          containerPort: 8080
+        # - name: tcp
+        #   containerPort: 8000
         - name: websecure
           containerPort: 443
         args:
-        - --api.insecure
+        #- --api.insecure
+        - --api.dashboard=true
         - --accesslog
         - --entrypoints.web.Address=:80
         - --entrypoints.websecure.address=:443
-        - --entrypoints.tcpep.address=:8000
+        #- --entrypoints.tcpep.address=:8000
         - --providers.kubernetescrd    # custom resource definition
         - --providers.kubernetesingress
         - --certificatesresolvers.myresolver.acme.tlschallenge

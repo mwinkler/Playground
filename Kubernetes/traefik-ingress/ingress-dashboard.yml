@@ -1,0 +1,36 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-ingress
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`traefik.mwinkler.ga`)
+    kind: Rule
+    services:
+    - kind: TraefikService
+      name: noop@internal
+    middlewares:
+    - name: https-redirect
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name:  traefik-dashboard-ingress-tls
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`traefik.mwinkler.ga`)
+    kind: Rule
+    services:
+    - kind: TraefikService
+      name: dashboard@internal
+    middlewares:
+    - name: auth
+  tls:
+    certResolver: myresolver
