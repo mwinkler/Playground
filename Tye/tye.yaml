@@ -1,0 +1,31 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: tyetest
+
+# extensions:
+# - name: elastic
+#   logPath: ./.logs
+
+ingress:
+  - name: ingress
+    bindings:
+      - port: 8080
+    rules:
+      - path: /
+        service: frontend
+
+services:
+- name: frontend
+  project: frontend/frontend.csproj
+  replicas: 2
+- name: backend
+  project: backend/backend.csproj
+- name: redis
+  image: redis
+  bindings:
+  - port: 6379
+    connectionString: ${host}:${port}
