@@ -6,9 +6,11 @@
 #
 name: tyetest
 
-# extensions:
+extensions:
 # - name: elastic
 #   logPath: ./.logs
+- name: seq
+  logPath: ./.logs
 
 ingress:
   - name: ingress
@@ -21,9 +23,11 @@ ingress:
 services:
 - name: frontend
   project: frontend/frontend.csproj
-  replicas: 2
+  replicas: 1
+  
 - name: backend
   project: backend/backend.csproj
+
 - name: redis
   image: redis
   bindings:
