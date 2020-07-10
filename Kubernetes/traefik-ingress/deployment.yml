@@ -37,6 +37,7 @@ spec:
         - --certificatesresolvers.myresolver.acme.tlschallenge
         - --certificatesresolvers.myresolver.acme.email=mwinkler@gmx.ch
         - --certificatesresolvers.myresolver.acme.storage=acme.json
+        - --metrics.prometheus=true
         resources:
           limits:
             memory: 128Mi
