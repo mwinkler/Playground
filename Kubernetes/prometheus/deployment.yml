@@ -20,3 +20,11 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 9090
+        volumeMounts:
+        - mountPath: /etc/prometheus/prometheus.yml
+          name: config
+          subPath: prometheus.yml
+      volumes:
+      - name: config
+        configMap:
+          name: prometheus-config-map

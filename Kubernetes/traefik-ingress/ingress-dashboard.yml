@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`traefik.mwinkler.ga`) || Host(`localhost`)
+  - match: Host(`traefik.mwinkler.ga`) || Host(`traefik.localhost`)
     kind: Rule
     services:
     - kind: TraefikService
@@ -25,7 +25,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`traefik.mwinkler.ga`) || Host(`localhost`)
+  - match: Host(`traefik.mwinkler.ga`) || Host(`traefik.localhost`)
     kind: Rule
     services:
     - kind: TraefikService
