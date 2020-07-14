@@ -14,3 +14,6 @@ data:
     - job_name: 'traefik'
       static_configs:
       - targets: ['traefik-metrics:9102']
+    - job_name: 'blazor-demo'
+      static_configs:
+      - targets: ['blazor-demo:52325']

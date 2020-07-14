@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`blazor.mwinkler.ga`)
+  - match: Host(`blazor.mwinkler.ga`) || Host(`blazor.localhost`)
     kind: Rule
     services:
     - kind: TraefikService
@@ -25,7 +25,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`blazor.mwinkler.ga`)
+  - match: Host(`blazor.mwinkler.ga`) || Host(`blazor.localhost`)
     kind: Rule
     services:
     - name: blazor-demo

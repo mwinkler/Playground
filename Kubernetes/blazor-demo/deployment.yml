@@ -21,3 +21,21 @@ spec:
             cpu: 100m
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /tmp
+          name: diagnostics
+      - name: sidecar
+        image: mcr.microsoft.com/dotnet/nightly/monitor:5.0.0-preview.1
+        ports:
+        - containerPort: 52325
+        # args: ["--urls", "http://*:52323", "--metricUrls", "http://*:52325"]
+        volumeMounts:
+        - name: diagnostics
+          mountPath: /tmp
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: 100m
+      volumes:
+      - name: diagnostics
+        emptyDir: {}
