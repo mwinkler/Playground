@@ -1,20 +1,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: traefik-ingress
+  name: traefik
   labels:
-    app: traefik-ingress
+    app: traefik
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traefik-ingress
+      app: traefik
   template:
     metadata:
       labels:
-        app: traefik-ingress
+        app: traefik
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9102'
     spec:
-      serviceAccountName: traefik-ingress-controller
+      serviceAccountName: traefik-controller
       containers:
       - name: traefik
         image: traefik
@@ -25,12 +28,15 @@ spec:
         #   containerPort: 8000
         - name: websecure
           containerPort: 443
+        - name: metrics
+          containerPort: 9102
         args:
         #- --api.insecure
         - --api.dashboard=true
         - --accesslog
         - --entrypoints.web.Address=:80
         - --entrypoints.websecure.address=:443
+        - --entrypoints.metrics.address=:9102
         #- --entrypoints.tcpep.address=:8000
         - --providers.kubernetescrd    # custom resource definition
         - --providers.kubernetesingress
@@ -38,6 +44,7 @@ spec:
         - --certificatesresolvers.myresolver.acme.email=mwinkler@gmx.ch
         - --certificatesresolvers.myresolver.acme.storage=acme.json
         - --metrics.prometheus=true
+        - --metrics.prometheus.entryPoint=metrics
         resources:
           limits:
             memory: 128Mi

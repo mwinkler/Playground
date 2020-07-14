@@ -4,7 +4,7 @@ metadata:
   name: traefik-ingress
 spec:
   selector:
-    app: traefik-ingress
+    app: traefik
   ports:
     - protocol: TCP
       port: 80
@@ -14,12 +14,4 @@ spec:
       port: 443
       targetPort: 443
       name: websecure
-    # - protocol: TCP
-    #   port: 8000
-    #   name: tcp
-    #   targetPort: 8000
-    # - protocol: TCP
-    #   port: 8080
-    #   targetPort: 8080
-    #   name: admin
   type: LoadBalancer

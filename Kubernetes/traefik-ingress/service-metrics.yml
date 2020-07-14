@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-metrics
+spec:
+  selector:
+    app: traefik
+  ports:
+    - protocol: TCP
+      port: 9102
+      targetPort: 9102
+      name: metrics
+  type: ClusterIP

@@ -3,4 +3,14 @@ kind: ConfigMap
 metadata:
   name: prometheus-config-map
 data:
-  file-from-cfgmap: file data
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+
+    scrape_configs:
+    - job_name: 'prometheus'
+      static_configs:
+      - targets: ['localhost:9090']
+    - job_name: 'traefik'
+      static_configs:
+      - targets: ['traefik-metrics:9102']
