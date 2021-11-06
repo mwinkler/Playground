@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 <body>
-    <h1>Blazor WebAssembly application from remote domain</h1>
-    <div id="app">Loading...</div>
+    <h1>Blazor WebAssembly application as WebComponent from remote domain</h1>
+    
+    <counter-app increment-amount="2"></counter-app>
+    <script src="https://localhost:7070/_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js"></script>
     <script src="https://localhost:7070/_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="https://localhost:7070/start.js"></script>
 </body>

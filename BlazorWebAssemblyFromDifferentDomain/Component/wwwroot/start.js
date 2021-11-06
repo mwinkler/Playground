@@ -1,9 +1,4 @@
 ﻿
-function load_counter_component() {
-    let containerElement = document.querySelector('#app');
-    Blazor.rootComponents.add(containerElement, 'counter', { incrementAmount: 10 });
-}
-
 Blazor
     .start({
         loadBootResource: function (type, name, defaultUri, integrity) {
