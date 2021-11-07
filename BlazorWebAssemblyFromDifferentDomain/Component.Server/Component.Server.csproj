@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Component\Component.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 
