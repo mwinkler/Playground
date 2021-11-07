@@ -1,12 +1,14 @@
 ﻿
 (function () {
 
+    var remote_url = 'https://localhost:7070';
+
     var startBlazor = function () {
         Blazor.start({
             loadBootResource: function (type, name, defaultUri, integrity) {
                 //console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
 
-                var url = 'https://localhost:7070/_framework/' + name;
+                var url = remote_url + '/_framework/' + name;
 
                 if (type == 'dotnetjs')
                     return url;
@@ -31,7 +33,7 @@
         document.body.appendChild(scriptTag);
     };
 
-    loadJS('https://localhost:7070/_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js');
-    loadJS('https://localhost:7070/_framework/blazor.webassembly.js', startBlazor, true);
+    loadJS(remote_url + '/_content/Microsoft.AspNetCore.Components.CustomElements/BlazorCustomElements.js');
+    loadJS(remote_url + '/_framework/blazor.webassembly.js', startBlazor, true);
 
 })();
