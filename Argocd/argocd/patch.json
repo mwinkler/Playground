@@ -1,0 +1,21 @@
+{
+    "spec": {
+        "type": "LoadBalancer",
+        "ports": [
+            {
+                "name": "http",
+                "nodePort": 32148,
+                "port": 51080,
+                "protocol": "TCP",
+                "targetPort": 8080
+            },
+            {
+                "name": "https",
+                "nodePort": 32270,
+                "port": 51443,
+                "protocol": "TCP",
+                "targetPort": 8080
+            }
+        ]
+    }
+}
