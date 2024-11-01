@@ -1,2 +1,4 @@
 
 .vs/
+/Redis/Sender/bin
+/Redis/Sender/obj
