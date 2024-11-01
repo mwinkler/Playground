@@ -2,3 +2,5 @@
 .vs/
 /Redis/Sender/bin
 /Redis/Sender/obj
+/ML5-JS/node_modules
+/ML5-JS/dist
