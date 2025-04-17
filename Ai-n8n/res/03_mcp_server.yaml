@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-fetch
+  labels:
+    app: mcp-fetch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-fetch
+  template:
+    metadata:
+      labels:
+        app: mcp-fetch
+    spec:
+      containers:
+        - name: mcp-fetch
+          image: mwinkler/mcp-proxy-uv
+          args: ["--sse-port=8080", "--sse-host=0.0.0.0", "uvx", "mcp-server-fetch"]
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-fetch
+  labels:
+    app: mcp-fetch
+spec:
+  selector:
+    app: mcp-fetch
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
