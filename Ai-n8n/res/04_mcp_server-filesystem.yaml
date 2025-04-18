@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-filesystem
+  labels:
+    app: mcp-filesystem
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-filesystem
+  template:
+    metadata:
+      labels:
+        app: mcp-filesystem
+    spec:
+      containers:
+        - name: mcp-filesystem
+          image: mwinkler/mcp-proxy-filesystem
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /root/data
+          args: ["/root/data"]
+      volumes:
+        - name: data
+          hostPath:
+            path: /data
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-filesystem
+  labels:
+    app: mcp-filesystem
+spec:
+  selector:
+    app: mcp-filesystem
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
