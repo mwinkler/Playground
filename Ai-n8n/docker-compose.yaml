@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:next
+    pull_policy: always
+    volumes:
+      - ./data/n8n:/home/node/.n8n
+    ports:
+      - "5678:5678"
+    networks:
+      - n8n-net
+    
+  ollama:
+    image: ollama/ollama:latest
+    pull_policy: always
+    volumes:
+      - ./data/ollama:/root/.ollama
+    networks:
+      - n8n-net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu] 
+
+networks:
+  n8n-net:
