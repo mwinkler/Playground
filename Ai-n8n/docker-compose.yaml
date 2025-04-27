@@ -3,7 +3,6 @@ version: '3.8'
 services:
   n8n:
     image: n8nio/n8n:next
-    pull_policy: always
     volumes:
       - ./data/n8n:/home/node/.n8n
     ports:
@@ -13,7 +12,6 @@ services:
     
   ollama:
     image: ollama/ollama:latest
-    pull_policy: always
     volumes:
       - ./data/ollama:/root/.ollama
     networks:
@@ -24,6 +22,22 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu] 
+
+  mcp-fetch:
+    build:
+      context: ./res/mcp-proxy-uv
+    command: ["--sse-port=8080", "--sse-host=0.0.0.0", "uvx", "mcp-server-fetch"]
+    networks:
+      - n8n-net
+  
+  mcp-filesystem:
+    build:
+      context: ./res/mcp-proxy-filesystem
+    command: ["/data"]
+    volumes:
+      - ./data:/data
+    networks:
+      - n8n-net
 
 networks:
   n8n-net:
